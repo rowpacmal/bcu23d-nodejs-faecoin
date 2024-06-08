@@ -1,5 +1,5 @@
 const errorHandler = (err, req, res, next) => {
-	res.status(500).json(err.message);
+	res.status(err.statusCode).json(err.message);
 };
 
 export default errorHandler;

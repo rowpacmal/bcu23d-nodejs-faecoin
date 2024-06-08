@@ -1,5 +1,7 @@
+import ErrorResponse from '../models/ErrorResponse.mjs';
+
 const resourceNotFound = (req, res, next) => {
-	next(new Error('Not Found'));
+	next(new ErrorResponse('Endpoint Not Found'));
 };
 
 export default resourceNotFound;
