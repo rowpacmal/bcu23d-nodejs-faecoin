@@ -12,9 +12,10 @@ const credentials = {
   subscribeKey: process.env.PUBNUB_SUB_KEY,
   secretKey: process.env.PUBNUB_SEC_KEY,
   userId: process.env.PUBNUB_USER_ID,
+  channel: 'faecoin',
 };
 
-const pubsub = new PubNubServer(credentials);
+const pubsub = new PubNubServer({ credentials });
 pubsub.start();
 
 const app = express();
@@ -28,5 +29,5 @@ const PORT = process.argv[2] || process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
 
-  setTimeout(() => pubsub.publishMessage('Hej'), 1000);
+  setTimeout(() => pubsub.publish(`Hej from ${PORT}`), 1000);
 });
