@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 import resourceNotFound from './utils/resourceNotFound.mjs';
 import errorHandler from './middlewares/errorHandler.mjs';
-import PubNubServer from './pubnub.mjs';
+import PubNubServer from './models/PubNubServer.mjs';
 
 dotenv.config({ path: 'config/config.env' });
 
