@@ -1,45 +1,34 @@
 import PubNub from 'pubnub';
 
+const defaultChannels = {
+  DEMO: 'DEMO',
+  BLOCKCHAIN: 'BLOCKCHAIN',
+  TRANSACTIONS: 'TRANSACTIONS',
+};
+
 export default class PubNubServer {
   #publishKey;
   #subscribeKey;
   #secretKey;
   #userId;
-  #channels;
   #server;
 
-  constructor({ blockchain, transactionPool, wallet, credentials, channels }) {
+  constructor({ blockchain, transactionPool, wallet, channels, credentials }) {
     const { publishKey, subscribeKey, secretKey, userId } = credentials;
 
     this.blockchain = blockchain;
     this.transactionPool = transactionPool;
     this.wallet = wallet;
+    this.channels = channels || defaultChannels;
 
     this.#publishKey = publishKey;
     this.#subscribeKey = subscribeKey;
     this.#secretKey = secretKey;
     this.#userId = userId;
-    this.#channels = channels;
 
-    this.#init();
+    this.#validateCredentials();
+    this.#initializeServer();
     this.#addListener();
-  }
-
-  #init() {
-    try {
-      this.#server = new PubNub({
-        publishKey: this.#publishKey,
-        subscribeKey: this.#subscribeKey,
-        secretKey: this.#secretKey,
-        userId: this.#userId,
-      });
-
-      if (Object.keys(this.#channels).length > 0) {
-        this.#server.subscribe({ channels: Object.values(this.#channels) });
-      }
-    } catch (error) {
-      console.error('Failed to initialize PubNub:', error.message);
-    }
   }
 
   #addListener() {
@@ -61,11 +50,37 @@ export default class PubNubServer {
     });
   }
 
-  broadcast() {}
-
-  async publish(channel, message) {
+  #initializeServer() {
     try {
-      const selectedChannel = this.#channels[channel];
+      this.#server = new PubNub({
+        publishKey: this.#publishKey,
+        subscribeKey: this.#subscribeKey,
+        secretKey: this.#secretKey,
+        userId: this.#userId,
+      });
+
+      if (Object.keys(this.channels).length > 0) {
+        this.#server.subscribe({ channels: Object.values(this.channels) });
+      }
+    } catch (error) {
+      console.error('Failed to initialize PubNub:', error.message);
+    }
+  }
+
+  #validateCredentials() {
+    if (
+      !this.#publishKey ||
+      !this.#subscribeKey ||
+      !this.#secretKey ||
+      !this.#userId
+    ) {
+      throw new Error('All PubNub credentials must be provided.');
+    }
+  }
+
+  async #publish({ channel, message }) {
+    try {
+      const selectedChannel = this.channels[channel];
 
       if (!selectedChannel) {
         throw new Error(`Channel ${channel} is not defined.`);
@@ -79,5 +94,17 @@ export default class PubNubServer {
     } catch (error) {
       console.error('Failed to publish message:', error.message);
     }
+  }
+
+  broadcast(channel, message) {
+    this.#publish({ channel, message });
+  }
+
+  broadcastBlockchain() {
+    this.#publish({ channel: 'BLOCKCHAIN', message: this.blockchain });
+  }
+
+  broadcastTransaction(transaction) {
+    this.#publish({ channel: 'TRANSACTION', message: transaction });
   }
 }

@@ -14,16 +14,7 @@ const credentials = {
   userId: process.env.PUBNUB_USER_ID,
 };
 
-const channels = {
-  DEMO: 'demo',
-  BLOCKCHAIN: 'blockchain',
-  TRANSACTIONS: 'transactions',
-};
-
-const pubsub = new PubNubServer({
-  credentials,
-  channels,
-});
+const pubsub = new PubNubServer({ credentials });
 
 const app = express();
 app.use(express.json());
@@ -36,5 +27,5 @@ const PORT = process.argv[2] || process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
 
-  setTimeout(() => pubsub.publish('DEMO', `{ "node": ${PORT} }`), 1000);
+  setTimeout(() => pubsub.broadcast('DEMO', { node: PORT }), 1000);
 });
