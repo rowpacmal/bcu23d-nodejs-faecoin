@@ -4,12 +4,13 @@ import dotenv from 'dotenv';
 import Blockchain from './models/Blockchain.mjs';
 import PubNubServer from './models/PubNubServer.mjs';
 
-import resourceNotFound from './utils/resourceNotFound.mjs';
 import errorHandler from './middlewares/errorHandler.mjs';
+import resourceNotFound from './utils/resourceNotFound.mjs';
+
+import blockchainRouter from './routes/blockchainRoutes.mjs';
 
 dotenv.config({ path: 'config/config.env' });
 
-const blockchain = new Blockchain();
 const credentials = {
   publishKey: process.env.PUBNUB_PUB_KEY,
   subscribeKey: process.env.PUBNUB_SUB_KEY,
@@ -17,11 +18,13 @@ const credentials = {
   userId: process.env.PUBNUB_USER_ID,
 };
 
-const pubsub = new PubNubServer({ blockchain, credentials });
+export const blockchain = new Blockchain();
+export const pubsub = new PubNubServer({ blockchain, credentials });
 
 const app = express();
 app.use(express.json());
 
+app.use('/api/v1/blockchain', blockchainRouter);
 app.all('*', resourceNotFound);
 
 app.use(errorHandler);
@@ -31,5 +34,5 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
 
   // setTimeout(() => pubsub.broadcast('DEMO', { node: PORT }), 1000);
-  setTimeout(() => pubsub.broadcastBlockchain(), 1000);
+  // setTimeout(() => pubsub.broadcastBlockchain(), 1000);
 });
