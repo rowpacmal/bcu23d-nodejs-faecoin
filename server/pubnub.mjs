@@ -5,21 +5,17 @@ export default class PubNubServer {
   #subscribeKey;
   #secretKey;
   #userId;
-  #channel;
+  #channels;
   #server;
 
-  constructor({ credentials }) {
+  constructor({ credentials, channels }) {
     const { publishKey, subscribeKey, secretKey, userId } = credentials;
 
     this.#publishKey = publishKey;
     this.#subscribeKey = subscribeKey;
     this.#secretKey = secretKey;
     this.#userId = userId;
-    this.#channel = {
-      DEMO: 'demo',
-      BLOCKCHAIN: 'blockchain',
-      TRANSACTIONS: 'transactions',
-    };
+    this.#channels = channels;
 
     this.#init();
   }
@@ -32,36 +28,31 @@ export default class PubNubServer {
         secretKey: this.#secretKey,
         userId: this.#userId,
       });
+
+      this.#server.subscribe({ channels: Object.values(this.#channels) });
+
+      this.#server.addListener({
+        message: (msgObject) => {
+          const { channel, message } = msgObject;
+
+          try {
+            const msg = JSON.parse(message);
+            console.log('Parsed message:', msg);
+
+            console.log(`Channel: ${channel}, Raw message: ${message}`);
+          } catch (error) {
+            console.error('Failed to parse message:', error.message);
+          }
+        },
+      });
     } catch (error) {
       console.error('Failed to initialize PubNub:', error);
     }
   }
 
-  start() {
-    try {
-      const channel = this.#server.channel(this.#channel.DEMO);
-      const subscription = channel.subscription();
-
-      this.#server.addListener({
-        status: (statusEvent) => {
-          console.log('Status:', statusEvent.category);
-        },
-      });
-
-      subscription.onMessage = (messageEvent) => {
-        const msg = messageEvent.message;
-        console.log('Message:', msg);
-      };
-
-      subscription.subscribe();
-    } catch (error) {
-      console.error('Failed to start PubNub server:', error);
-    }
-  }
-
   async publish(channel, message) {
     try {
-      const selectedChannel = this.#channel[channel];
+      const selectedChannel = this.#channels[channel];
 
       if (!selectedChannel) {
         throw new Error(`Channel ${channel} is not defined.`);
