@@ -8,8 +8,12 @@ export default class PubNubServer {
   #channels;
   #server;
 
-  constructor({ credentials, channels }) {
+  constructor({ blockchain, transactionPool, wallet, credentials, channels }) {
     const { publishKey, subscribeKey, secretKey, userId } = credentials;
+
+    this.blockchain = blockchain;
+    this.transactionPool = transactionPool;
+    this.wallet = wallet;
 
     this.#publishKey = publishKey;
     this.#subscribeKey = subscribeKey;
@@ -18,6 +22,7 @@ export default class PubNubServer {
     this.#channels = channels;
 
     this.#init();
+    this.#addListener();
   }
 
   #init() {
@@ -29,26 +34,34 @@ export default class PubNubServer {
         userId: this.#userId,
       });
 
-      this.#server.subscribe({ channels: Object.values(this.#channels) });
-
-      this.#server.addListener({
-        message: (msgObject) => {
-          const { channel, message } = msgObject;
-
-          try {
-            const msg = JSON.parse(message);
-            console.log('Parsed message:', msg);
-
-            console.log(`Channel: ${channel}, Raw message: ${message}`);
-          } catch (error) {
-            console.error('Failed to parse message:', error.message);
-          }
-        },
-      });
+      if (Object.keys(this.#channels).length > 0) {
+        this.#server.subscribe({ channels: Object.values(this.#channels) });
+      }
     } catch (error) {
-      console.error('Failed to initialize PubNub:', error);
+      console.error('Failed to initialize PubNub:', error.message);
     }
   }
+
+  #addListener() {
+    this.#server.addListener({
+      message: (messageObject) => {
+        const { channel, message } = messageObject;
+
+        try {
+          const parsedMessage = JSON.parse(message);
+
+          console.log(
+            `Channel: ${channel}\nRaw message: ${message}\nParsed message:`,
+            parsedMessage
+          );
+        } catch (error) {
+          console.error('Failed to parse message:', error.message);
+        }
+      },
+    });
+  }
+
+  broadcast() {}
 
   async publish(channel, message) {
     try {
@@ -60,10 +73,11 @@ export default class PubNubServer {
 
       await this.#server.publish({
         channel: selectedChannel,
-        message: message || '',
+        message:
+          typeof message === 'string' ? message : JSON.stringify(message),
       });
     } catch (error) {
-      console.error('Failed to publish message:', error);
+      console.error('Failed to publish message:', error.message);
     }
   }
 }
