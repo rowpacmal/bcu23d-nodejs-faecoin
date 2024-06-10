@@ -5,7 +5,7 @@ const genesisBlock = {
   hash: '0',
   data: [],
   nonce: 0,
-  difficulty: 3,
+  difficulty: +process.env.DEFAULT_DIFFICULTY || 3,
 };
 
 export default genesisBlock;

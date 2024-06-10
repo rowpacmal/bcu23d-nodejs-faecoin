@@ -26,7 +26,7 @@ app.all('*', resourceNotFound);
 
 app.use(errorHandler);
 
-const PORT = process.argv[2] || process.env.PORT || 5050;
+const PORT = process.argv[2] || process.env.DEFAULT_PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
 
