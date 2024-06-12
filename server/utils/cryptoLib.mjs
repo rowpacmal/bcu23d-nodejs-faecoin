@@ -1,4 +1,7 @@
 import crypto from 'crypto';
+import pkg from 'elliptic';
+
+const { ec } = pkg;
 
 export const createHash = (...args) => {
   return crypto
@@ -11,3 +14,5 @@ export const createHash = (...args) => {
     )
     .digest('hex');
 };
+
+export const ellipticHash = new ec('secp256k1');
