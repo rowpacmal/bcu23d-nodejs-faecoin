@@ -1,11 +1,5 @@
 import PubNub from 'pubnub';
 
-const defaultChannels = {
-  DEMO: 'DEMO',
-  BLOCKCHAIN: 'BLOCKCHAIN',
-  TRANSACTIONS: 'TRANSACTIONS',
-};
-
 export default class PubNubServer {
   constructor({ blockchain, transactionPool, wallet, credentials }) {
     const { publishKey, subscribeKey, secretKey, userId } = credentials;
@@ -13,14 +7,17 @@ export default class PubNubServer {
     this.blockchain = blockchain;
     this.transactionPool = transactionPool;
     this.wallet = wallet;
-    this.channels = defaultChannels;
+    this.channels = {
+      DEMO: 'DEMO',
+      BLOCKCHAIN: 'BLOCKCHAIN',
+      TRANSACTIONS: 'TRANSACTIONS',
+    };
 
     this.publishKey = publishKey;
     this.subscribeKey = subscribeKey;
     this.secretKey = secretKey;
     this.userId = userId;
 
-    this.validateCredentials();
     this.initializeServer();
     this.addListener();
   }
@@ -54,6 +51,15 @@ export default class PubNubServer {
   }
 
   initializeServer() {
+    if (
+      !this.publishKey ||
+      !this.subscribeKey ||
+      !this.secretKey ||
+      !this.userId
+    ) {
+      throw new Error('All PubNub credentials must be provided.');
+    }
+
     try {
       this.server = new PubNub({
         publishKey: this.publishKey,
@@ -67,17 +73,6 @@ export default class PubNubServer {
       }
     } catch (error) {
       console.error('Failed to initialize PubNub:', error.message);
-    }
-  }
-
-  validateCredentials() {
-    if (
-      !this.publishKey ||
-      !this.subscribeKey ||
-      !this.secretKey ||
-      !this.userId
-    ) {
-      throw new Error('All PubNub credentials must be provided.');
     }
   }
 
