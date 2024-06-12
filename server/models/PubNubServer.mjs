@@ -1,5 +1,10 @@
 import PubNub from 'pubnub';
-import defaultChannels from '../utils/defaultChannels.mjs';
+
+const defaultChannels = {
+  DEMO: 'DEMO',
+  BLOCKCHAIN: 'BLOCKCHAIN',
+  TRANSACTIONS: 'TRANSACTIONS',
+};
 
 export default class PubNubServer {
   #publishKey;
