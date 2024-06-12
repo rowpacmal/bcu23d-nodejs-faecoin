@@ -41,8 +41,8 @@ export default class Blockchain {
       if (hash !== validHash) return false;
       if (prevHash !== lastHash) return false;
       if (Math.abs(lastDifficulty - difficulty) > 1) return false;
-
-      return true;
     }
+
+    return true;
   }
 }
