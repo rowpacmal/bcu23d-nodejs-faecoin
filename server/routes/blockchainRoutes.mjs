@@ -1,12 +1,8 @@
 import express from 'express';
-import {
-  getAllBlocks,
-  mineBlock,
-} from '../controllers/blockchainController.mjs';
+import { getAllBlocks } from '../controllers/blockchainController.mjs';
 
 const blockchainRouter = express.Router();
 
-blockchainRouter.get('/', getAllBlocks);
-blockchainRouter.post('/mine', mineBlock);
+blockchainRouter.route('/').get(getAllBlocks);
 
 export default blockchainRouter;
