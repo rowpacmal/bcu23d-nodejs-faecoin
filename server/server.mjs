@@ -10,6 +10,7 @@ import errorHandler from './middlewares/errorHandler.mjs';
 import resourceNotFound from './utils/resourceNotFound.mjs';
 
 import blockchainRouter from './routes/blockchainRoutes.mjs';
+import transactionRouter from './routes/transactionRoutes.mjs';
 
 dotenv.config({ path: 'config/config.env' });
 
@@ -34,6 +35,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/v1/blockchain', blockchainRouter);
+app.use('/api/v1/transactions', transactionRouter);
 app.all('*', resourceNotFound);
 
 app.use(errorHandler);
