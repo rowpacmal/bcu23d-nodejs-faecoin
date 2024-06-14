@@ -17,15 +17,3 @@ export const getAllBlocks = (req, res, next) => {
     next(new ErrorResponse(error.message, 500));
   }
 };
-
-export const mineBlock = (req, res, next) => {
-  try {
-    const block = blockchain.addBlock(req.body);
-
-    res
-      .status(201)
-      .json(new DataResponse('Successfully mined a block', 201, block));
-  } catch (error) {
-    next(new ErrorResponse(error.message, 500));
-  }
-};
