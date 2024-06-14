@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 import Blockchain from './models/Blockchain.mjs';
+import TransactionPool from './models/TransactionPool.mjs';
+import Wallet from './models/Wallet.mjs';
 import PubNubServer from './models/PubNubServer.mjs';
 
 import errorHandler from './middlewares/errorHandler.mjs';
@@ -19,7 +21,14 @@ const credentials = {
 };
 
 export const blockchain = new Blockchain();
-export const pubsub = new PubNubServer({ blockchain, credentials });
+export const transactionPool = new TransactionPool();
+export const wallet = new Wallet();
+export const pubsub = new PubNubServer({
+  blockchain,
+  transactionPool,
+  wallet,
+  credentials,
+});
 
 const app = express();
 app.use(express.json());
