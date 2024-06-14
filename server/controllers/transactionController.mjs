@@ -1,4 +1,4 @@
-import { blockchain, pubnub, transactionPool, wallet } from '../server.mjs';
+import { blockchain, pubnub, transactionPool, wallet } from '../startup.mjs';
 import Miner from '../models/Miner.mjs';
 import Wallet from '../models/Wallet.mjs';
 import DataResponse from '../models/DataResponse.mjs';
