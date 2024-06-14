@@ -1,4 +1,5 @@
 import { createHash, ellipticHash } from '../utils/cryptoLib.mjs';
+import Transaction from './Transaction.mjs';
 import ErrorResponse from './ErrorResponse.mjs';
 
 export default class Wallet {

@@ -24,7 +24,7 @@ const credentials = {
 export const blockchain = new Blockchain();
 export const transactionPool = new TransactionPool();
 export const wallet = new Wallet();
-export const pubsub = new PubNubServer({
+export const pubnub = new PubNubServer({
   blockchain,
   transactionPool,
   wallet,

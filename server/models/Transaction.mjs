@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { verifySignature } from '../utilities/crypto-lib.mjs';
+import { verifySignature } from '../utils/cryptoLib.mjs';
 import ErrorResponse from './ErrorResponse.mjs';
 
 export default class Transaction {

@@ -24,7 +24,7 @@ export const addTransaction = (req, res, next) => {
   }
 
   transactionPool.addTransaction(transaction);
-  pubnubServer.broadcastTransaction(transaction);
+  // pubnub.broadcastTransaction(transaction);
 
   res.status(201).json({ success: true, statusCode: 201, data: transaction });
 };
@@ -39,7 +39,7 @@ export const getWalletBalance = (req, res, next) => {
   res.status(200).json({
     success: true,
     statusCode: 200,
-    data: { address: address, balance: balance },
+    data: { address, balance },
   });
 };
 

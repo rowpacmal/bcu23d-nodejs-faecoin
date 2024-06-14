@@ -10,7 +10,7 @@ const transactionRouter = express.Router();
 
 transactionRouter.route('/').get(getTransactionPool).post(addTransaction);
 
-transactionRouter.route('/balance').get(getWalletBalance);
+transactionRouter.route('/wallet').get(getWalletBalance);
 
 transactionRouter.route('/mine').get(mineTransactions);
 
