@@ -15,7 +15,11 @@ export const addTransaction = (req, res, next) => {
     if (transaction) {
       transaction.update({ sender: wallet, recipient, amount });
     } else {
-      transaction = wallet.createTransaction({ recipient, amount });
+      transaction = wallet.createTransaction({
+        recipient,
+        amount,
+        chain: blockchain.chain,
+      });
     }
   } catch (error) {
     return res
@@ -32,7 +36,7 @@ export const addTransaction = (req, res, next) => {
 export const getWalletBalance = (req, res, next) => {
   const address = wallet.publicKey;
   const balance = Wallet.calculateBalance({
-    chain: blockchain,
+    chain: blockchain.chain,
     address,
   });
 
@@ -51,7 +55,7 @@ export const getTransactionPool = (req, res, next) => {
   });
 };
 
-export const mineTransactions = (req, res, next) => {
+export const mineTransactions = async (req, res, next) => {
   const miner = new Miner({
     blockchain,
     transactionPool,
@@ -59,7 +63,7 @@ export const mineTransactions = (req, res, next) => {
     pubsub: pubnub,
   });
 
-  miner.mineTransaction();
+  await miner.mineTransaction();
 
   res.status(200).json({
     success: true,

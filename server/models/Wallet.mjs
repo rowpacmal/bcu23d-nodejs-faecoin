@@ -11,7 +11,7 @@ export default class Wallet {
 
   createTransaction({ recipient, amount, chain }) {
     if (chain) {
-      this.balance = Wallet.calculateBalance({
+      this.balance = this.constructor.calculateBalance({
         chain,
         address: this.publicKey,
       });

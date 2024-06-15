@@ -1,7 +1,7 @@
 import express from 'express';
 import { startup } from './startup.mjs';
 
-import logHandler from './middlewares/logHandler.mjs';
+// import logHandler from './middlewares/logHandler.mjs';
 import errorHandler from './middlewares/errorHandler.mjs';
 import mainRouter from './routes/mainRoutes.mjs';
 import resourceNotFound from './utils/resourceNotFound.mjs';
@@ -10,7 +10,7 @@ startup();
 
 const app = express();
 app.use(express.json());
-app.use(logHandler);
+// app.use(logHandler);
 
 app.use('/api/v1', mainRouter);
 app.all('*', resourceNotFound);

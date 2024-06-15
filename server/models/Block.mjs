@@ -35,7 +35,7 @@ export default class Block {
     do {
       nonce++;
       timestamp = Date.now();
-      difficulty = Block.adjustDifficultyLevel(prevBlock, timestamp);
+      difficulty = this.adjustDifficultyLevel(prevBlock, timestamp);
       hash = createHash(index, timestamp, prevHash, data, nonce, difficulty);
     } while (!hexToBinary(hash).startsWith('0'.repeat(difficulty)));
 
