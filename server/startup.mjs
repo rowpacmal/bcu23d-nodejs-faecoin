@@ -11,12 +11,12 @@ import User from './models/User.mjs';
 
 export let blockchain, transactionPool, wallet, pubnub;
 
-const createConstructor = async (prototype) => {
-  if (!(await prototype.find())[0]) {
-    return await prototype.create({});
-  } else {
-    return new prototype((await prototype.find())[0]);
-  }
+const createConstructor = async (Prototype) => {
+  let instance = await Prototype.findOne();
+
+  if (!instance) instance = await Prototype.create({});
+
+  return instance;
 };
 
 export const startup = async () => {
