@@ -7,14 +7,15 @@ import Blockchain from './models/Blockchain.mjs';
 import TransactionPool from './models/TransactionPool.mjs';
 import Wallet from './models/Wallet.mjs';
 import PubNubServer from './models/PubNubServer.mjs';
-import User from './models/User.mjs';
 
 export let blockchain, transactionPool, wallet, pubnub;
 
 const createConstructor = async (Prototype) => {
   let instance = await Prototype.findOne();
 
-  if (!instance) instance = await Prototype.create({});
+  if (!instance) {
+    instance = await Prototype.create({});
+  }
 
   return instance;
 };
@@ -42,10 +43,4 @@ export const startup = async () => {
     wallet,
     credentials,
   });
-
-  // await User.create({
-  //   name: 'Test',
-  //   email: 'info@test.me',
-  //   password: 'test1!',
-  // });
 };
