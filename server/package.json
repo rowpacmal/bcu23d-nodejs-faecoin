@@ -9,7 +9,7 @@
   "scripts": {
     "test": "vitest",
     "start": "node server.mjs",
-    "dev": "nodemon server.mjs"
+    "dev": "nodemon --delay 2s server.mjs"
   },
   "keywords": [
     "faecoin",
