@@ -7,11 +7,11 @@ export const getAllBlocks = (req, res, next) => {
     res
       .status(200)
       .json(
-        new DataResponse(
-          'Successfully fetched the chain',
-          200,
-          blockchain.chain
-        )
+        new DataResponse({
+          message: 'Successfully fetched the chain',
+          statusCode: 200,
+          data: blockchain.chain,
+        })
       );
   } catch (error) {
     next(new ErrorResponse(error.message, 500));

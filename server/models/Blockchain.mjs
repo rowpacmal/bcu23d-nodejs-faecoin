@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { createHash } from '../utils/cryptoLib.mjs';
 import Block from './Block.mjs';
 
-const blockchainSchema = mongoose.Schema({
+const blockchainSchema = new mongoose.Schema({
   chain: { type: [Object], required: true, default: [Block.genesis] },
 });
 

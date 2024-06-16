@@ -4,7 +4,23 @@ import asyncHandler from './asyncHandler.mjs';
 import User from '../models/User.mjs';
 import ErrorResponse from '../models/ErrorResponse.mjs';
 
-export const protect = asyncHandler(async (req, res, next) => {
+export const authorizedAccess = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new ErrorResponse(
+          `${req.user.role.toUpperCase()} are unauthorized, access denied`,
+          403
+        )
+      );
+    }
+
+    next();
+  };
+};
+
+export const protectedAccess = asyncHandler(async (req, res, next) => {
+  const errorRes = new ErrorResponse('Unauthorized, access denied', 401);
   let token;
 
   if (
@@ -14,26 +30,12 @@ export const protect = asyncHandler(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
 
-  if (!token) next(new ErrorResponse('Behörighet saknas', 401));
+  if (!token) next(errorRes);
 
-  const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+  const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
   req.user = await User.findById(decodedToken.id);
 
-  if (!req.user) next(new ErrorResponse('Behörighet saknas', 401));
+  if (!req.user) next(errorRes);
 
   next();
 });
-
-export const authorize = (...roles) => {
-  return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      return res.status(403).json({
-        success: false,
-        statusCode: 403,
-        message: `Rollen ${req.user.role} har inte behörighet`,
-      });
-    }
-
-    next();
-  };
-};

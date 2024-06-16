@@ -5,9 +5,13 @@ import DataResponse from '../models/DataResponse.mjs';
 export const createUser = asyncHandler(async (req, res, next) => {
   const user = await User.create(req.body);
 
-  res
-    .status(201)
-    .json(new DataResponse('Successfully created an user', 201, user));
+  res.status(201).json(
+    new DataResponse({
+      messaeg: 'Successfully created an user',
+      statusCode: 201,
+      data: user,
+    })
+  );
 });
 
 export const deleteUser = asyncHandler(async (req, res, next) => {
@@ -19,9 +23,13 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
 export const getUser = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id).select('-password');
 
-  res
-    .status(200)
-    .json(new DataResponse('Successfully find an user', 200, user));
+  res.status(200).json(
+    new DataResponse({
+      message: 'Successfully find an user',
+      statusCode: 200,
+      data: user,
+    })
+  );
 });
 
 export const getUsers = asyncHandler(async (req, res, next) => {
@@ -29,7 +37,13 @@ export const getUsers = asyncHandler(async (req, res, next) => {
 
   res
     .status(200)
-    .json(new DataResponse('Successfully find all user', 200, users));
+    .json(
+      new DataResponse({
+        message: 'Successfully find all user',
+        statusCode: 200,
+        data: users,
+      })
+    );
 });
 
 export const updateUser = asyncHandler(async (req, res, next) => {
