@@ -9,7 +9,7 @@ export const authorizedAccess = (...roles) => {
     if (!roles.includes(req.user.role)) {
       return next(
         new ErrorResponse(
-          `${req.user.role.toUpperCase()} are unauthorized, access denied`,
+          `${req.user.role.toUpperCase()}s are unauthorized, access denied`,
           403
         )
       );

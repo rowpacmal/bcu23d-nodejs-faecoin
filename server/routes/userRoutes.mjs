@@ -13,8 +13,9 @@ import {
 
 const userRouter = express.Router();
 
-userRouter.use(authorizedAccess('admin'));
 userRouter.use(protectedAccess);
+userRouter.use(authorizedAccess('admin'));
+
 userRouter.route('/').get(getUsers).post(createUser);
 userRouter.route('/:id').get(getUser).delete(deleteUser).put(updateUser);
 

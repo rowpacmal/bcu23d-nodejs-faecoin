@@ -17,6 +17,7 @@ authRouter.route('/register').post(registerAccount);
 authRouter.route('/login').post(loginToAccount);
 
 authRouter.use(protectedAccess);
+
 authRouter.route('/me').get(getMyAccount);
 authRouter.route('/edit/details').put(updateAccountDetails);
 authRouter.route('/edit/password').put(updateAccountPassword);

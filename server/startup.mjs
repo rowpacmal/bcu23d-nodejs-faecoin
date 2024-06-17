@@ -10,7 +10,7 @@ import PubNubServer from './models/PubNubServer.mjs';
 
 export let blockchain, transactionPool, wallet, pubnub;
 
-const createConstructor = async (Prototype) => {
+const createInstance = async (Prototype) => {
   let instance = await Prototype.findOne();
 
   if (!instance) {
@@ -34,7 +34,7 @@ export const startup = async () => {
     userId: process.env.PUBNUB_USER_ID,
   };
 
-  blockchain = await createConstructor(Blockchain);
+  blockchain = await createInstance(Blockchain);
   transactionPool = new TransactionPool();
   wallet = new Wallet();
   pubnub = new PubNubServer({
