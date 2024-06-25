@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { startup } from './startup.mjs';
 
 // import logHandler from './middlewares/logHandler.mjs';
@@ -10,6 +11,7 @@ startup();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 // app.use(logHandler);
 
 app.use('/api/v1', mainRouter);
