@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Transaction from './pages/Transaction';
+import User from './pages/User';
 
 export const router = createBrowserRouter([
   {
@@ -29,8 +30,12 @@ export const router = createBrowserRouter([
         element: <Explorer />,
       },
       {
-        path: '/transaction',
+        path: '/send',
         element: <Transaction />,
+      },
+      {
+        path: '/me',
+        element: <User />,
       },
     ],
   },

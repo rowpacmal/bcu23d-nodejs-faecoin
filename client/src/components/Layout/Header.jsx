@@ -34,7 +34,7 @@ function Header() {
             </li>
 
             <li>
-              <NavLink to="/transaction">Transaction</NavLink>
+              <NavLink to="/send">Transaction</NavLink>
             </li>
 
             {!localStorage.getItem('TOKEN') ? (
@@ -52,9 +52,17 @@ function Header() {
                 </li>
               </>
             ) : (
-              <li>
-                <button onClick={handleSignOut}>Sign Out</button>
-              </li>
+              <>
+                <li>
+                  <NavLink to="/me">
+                    <button>Me</button>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <button onClick={handleSignOut}>Sign Out</button>
+                </li>
+              </>
             )}
           </ul>
         </nav>
