@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 import asyncHandler from '../middlewares/asyncHandler.mjs';
 import User from '../models/User.mjs';
 import DataResponse from '../models/DataResponse.mjs';
@@ -63,6 +65,20 @@ export const updateAccountPassword = asyncHandler(async (req, res, next) => {
   await user.save();
 
   generateAndSendToken(user, res, 'Successfully updated the password', 204);
+});
+
+export const validAccountToken = asyncHandler(async (req, res, next) => {
+  const decodedToken = jwt.verify(req.params.token, process.env.JWT_SECRET_KEY);
+  const user = await User.findById(decodedToken.id);
+
+  if (!user) return next(new ErrorResponse('User not found', 404));
+
+  res.status(200).json(
+    new DataResponse({
+      message: 'Valid token, access approved',
+      statusCode: 200,
+    })
+  );
 });
 
 const generateAndSendToken = (user, res, message, statusCode) => {
