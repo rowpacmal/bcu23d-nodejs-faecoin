@@ -29,3 +29,7 @@ export const userSignIn = async (data) => {
 export const userSignUp = async (data) => {
   return httpClient({ method: 'post', endpoint: '/auth/register', data });
 };
+
+export const validateToken = async (token) => {
+  return httpClient({ method: 'get', endpoint: `/auth/token/${token}` });
+};

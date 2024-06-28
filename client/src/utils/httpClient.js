@@ -15,8 +15,6 @@ export const httpClient = async ({ method, endpoint, data, token }) => {
     options.headers['Authorization'] = `Bearer ${token}`;
   }
 
-  console.log(options);
-
   try {
     const response = await fetch(`${settings.baseUrl}${endpoint}`, options);
     const result = await response.json();

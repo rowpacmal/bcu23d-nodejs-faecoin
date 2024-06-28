@@ -36,5 +36,16 @@
 .ul {
   display: flex;
   align-items: center;
+  gap: 3rem;
+}
+
+.control {
+  display: flex;
+  align-items: center;
   gap: 1rem;
+
+  li a {
+    display: flex;
+    place-items: center;
+  }
 }

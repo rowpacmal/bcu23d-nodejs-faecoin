@@ -5,7 +5,6 @@ function User() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    console.log('effect');
     if (Object.values(user).length > 0) return;
 
     async function getUserInfo() {
