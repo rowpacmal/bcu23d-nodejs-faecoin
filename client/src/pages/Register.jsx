@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userSignUp } from '../services/userService';
 import updateFormData from '../utils/updateFormData';
+import GlobalContext from '../contexts/GlobalContext';
 
 function Register() {
   const navigate = useNavigate();
+  const { isValid, setIsValid } = useContext(GlobalContext);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,9 +14,7 @@ function Register() {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem('TOKEN');
-
-    if (token) {
+    if (isValid) {
       navigate('/');
     } else {
       return;
@@ -31,6 +31,7 @@ function Register() {
     const token = (await userSignUp(formData)).data;
     localStorage.setItem('TOKEN', token);
 
+    setIsValid(true);
     navigate('/');
   }
 

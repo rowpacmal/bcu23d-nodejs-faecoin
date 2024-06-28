@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import updateFormData from '../utils/updateFormData';
 import { Link } from 'react-router-dom';
 import { addTransaction } from '../services/transactionService';
+import GlobalContext from '../contexts/GlobalContext';
 
 function Transaction() {
+  const { isValid } = useContext(GlobalContext);
   const [formData, setFormData] = useState({
     recipient: '',
     amount: '',
@@ -26,7 +28,7 @@ function Transaction() {
     <section>
       <h2>Transaction</h2>
 
-      {localStorage.getItem('TOKEN') ? (
+      {isValid ? (
         <form onSubmit={handleSubmit}>
           <div>
             <label>
