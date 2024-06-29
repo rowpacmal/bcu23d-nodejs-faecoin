@@ -37,7 +37,17 @@ export default class PubNubServer {
 
           switch (channel) {
             case this.channels.BLOCKCHAIN:
-              this.blockchain.updateChain(parsedMessage);
+              this.blockchain.updateChain(parsedMessage, true, () => {
+                this.transactionPool.clearBlockTransactions(parsedMessage);
+              });
+              break;
+
+            case this.channels.TRANSACTIONS:
+              if (
+                !this.transactionPool.transactionExist(this.wallet.publicKey)
+              ) {
+                this.transactionPool.addTransaction(parsedMessage);
+              }
               break;
 
             default:
