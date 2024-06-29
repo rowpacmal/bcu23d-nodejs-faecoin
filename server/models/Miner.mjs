@@ -1,12 +1,12 @@
-import Blockchain from './Blockchain.mjs';
+import Chain from './Chain.mjs';
 import Transaction from './Transaction.mjs';
 
 export default class Miner {
-  constructor({ blockchain, wallet, transactionPool, pubsub }) {
+  constructor({ blockchain, wallet, transactionPool, pubnub }) {
     this.blockchain = blockchain;
     this.wallet = wallet;
     this.transactionPool = transactionPool;
-    this.pubsub = pubsub;
+    this.pubnub = pubnub;
   }
 
   async mineTransaction() {
@@ -14,9 +14,15 @@ export default class Miner {
     validTransactions.push(
       Transaction.transactionReward({ miner: this.wallet })
     );
-    this.blockchain.addBlock({ data: validTransactions });
-    await Blockchain.findOneAndUpdate({}, this.blockchain);
-    // this.pubsub.broadcast();
-    this.transactionPool.clearTransactions();
+
+    this.blockchain.addBlock(validTransactions);
+
+    if (!(await Chain.findOne())) {
+      await Chain.create(this.blockchain);
+    } else {
+      await Chain.findOneAndUpdate({}, this.blockchain);
+    }
+
+    this.transactionPool.clearAllTransactions();
   }
 }
