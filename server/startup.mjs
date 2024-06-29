@@ -36,15 +36,19 @@ export const startup = async () => {
 };
 
 export const synchronize = async () => {
-  let response = await fetch(`${process.env.DEFAULT_NODE}/api/v1/blockchain`);
-  if (response.ok) {
-    const result = await response.json();
+  const responseBlockchain = await fetch(
+    `${process.env.DEFAULT_NODE}/api/v1/blockchain`
+  );
+  if (responseBlockchain.ok) {
+    const result = await responseBlockchain.json();
     blockchain.updateChain(result.data);
   }
 
-  response = await fetch(`${process.env.DEFAULT_NODE}/api/v1/transactions`);
-  if (response.ok) {
-    const result = await response.json();
+  const responseTransactions = await fetch(
+    `${process.env.DEFAULT_NODE}/api/v1/transactions`
+  );
+  if (responseTransactions.ok) {
+    const result = await responseTransactions.json();
     transactionPool.updateTransactionMap(result.data);
   }
 };
