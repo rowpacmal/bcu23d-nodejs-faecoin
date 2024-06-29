@@ -1,4 +1,5 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import generalStyle from '../../styles/general.module.css';
 import style from '../../styles/Header.module.css';
 import { useContext } from 'react';
 import GlobalContext from '../../contexts/GlobalContext';
@@ -16,7 +17,7 @@ function Header() {
 
   return (
     <header className={style.header}>
-      <div className={style.container}>
+      <div className={`${generalStyle.container} ${style.container}`}>
         <Link to="/" className={style.link}>
           <img
             src="./src/assets/fae_logo.svg"

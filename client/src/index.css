@@ -1,7 +1,6 @@
 :root {
   --primary-color: #101010;
   --secondary-color: #fefefe;
-  --container-max-width: 1280px;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
