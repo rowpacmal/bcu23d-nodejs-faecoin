@@ -11,11 +11,10 @@ export default class Miner {
 
   async mineTransaction() {
     const validTransactions = this.transactionPool.validateTransactions();
-    validTransactions.push(
-      Transaction.transactionReward({ miner: this.wallet })
-    );
+    validTransactions.push(Transaction.transactionReward(this.wallet));
 
     this.blockchain.addBlock(validTransactions);
+    this.pubnub.broadcastBlockchain();
 
     if (!(await Chain.findOne())) {
       await Chain.create(this.blockchain);

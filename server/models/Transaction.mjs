@@ -3,8 +3,8 @@ import { verifySignature } from '../utils/cryptoLib.mjs';
 import ErrorResponse from './ErrorResponse.mjs';
 
 export default class Transaction {
-  constructor({ sender, recipient, amount, inputMap, outputMap }) {
-    this.id = uuidv4().replaceAll('-', '');
+  constructor({ id, sender, recipient, amount, inputMap, outputMap }) {
+    this.id = id || uuidv4().replaceAll('-', '');
     this.outputMap =
       outputMap || this.createOutputMap({ sender, recipient, amount });
     this.inputMap =
@@ -27,9 +27,9 @@ export default class Transaction {
     };
   }
 
-  static transactionReward({ miner }) {
+  static transactionReward(miner) {
     return new this({
-      inputMap: process.env.DEFAULT_REWARD_ADDRESS,
+      inputMap: { address: process.env.DEFAULT_REWARD_ADDRESS },
       outputMap: { [miner.publicKey]: +process.env.DEFAULT_MINING_REWARD },
     });
   }

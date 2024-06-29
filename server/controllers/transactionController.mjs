@@ -26,7 +26,7 @@ export const addTransaction = (req, res, next) => {
   }
 
   transactionPool.addTransaction(transaction);
-  // pubnub.broadcastTransaction(transaction);
+  pubnub.broadcastTransaction(transaction);
 
   res.status(201).json({ success: true, statusCode: 201, data: transaction });
 };
