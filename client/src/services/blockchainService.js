@@ -1,13 +1,25 @@
 import { httpClient } from '../utils/httpClient';
 
 export const getAllBlocks = async () => {
-  return httpClient({ method: 'get', endpoint: '/blockchain' });
+  const response = await httpClient({ method: 'get', endpoint: '/blockchain' });
+
+  return response?.data;
 };
 
 export const getBlockByIndex = async (index) => {
-  return httpClient({ method: 'get', endpoint: `/blockchain/blocks/${index}` });
+  const response = await httpClient({
+    method: 'get',
+    endpoint: `/blockchain/blocks/${index}`,
+  });
+
+  return response?.data;
 };
 
 export const getLatestBlock = async () => {
-  return httpClient({ method: 'get', endpoint: '/blockchain/blocks/latest' });
+  const response = await httpClient({
+    method: 'get',
+    endpoint: '/blockchain/blocks/latest',
+  });
+
+  return response?.data;
 };
