@@ -1,4 +1,5 @@
 import PubNub from 'pubnub';
+import Transaction from './Transaction.mjs';
 
 export default class PubNubServer {
   constructor({ blockchain, transactionPool, wallet, credentials }) {
@@ -10,7 +11,7 @@ export default class PubNubServer {
     this.channels = {
       DEMO: 'DEMO',
       BLOCKCHAIN: 'BLOCKCHAIN',
-      TRANSACTIONS: 'TRANSACTIONS',
+      TRANSACTION: 'TRANSACTION',
     };
 
     this.publishKey = publishKey;
@@ -42,12 +43,16 @@ export default class PubNubServer {
               });
               break;
 
-            case this.channels.TRANSACTIONS:
-              if (
-                !this.transactionPool.transactionExist(this.wallet.publicKey)
-              ) {
-                this.transactionPool.addTransaction(parsedMessage);
-              }
+            case this.channels.TRANSACTION:
+              // if (
+              //   !this.transactionPool.transactionExist(this.wallet.publicKey)
+              // ) {
+              //   this.transactionPool.addTransaction(parsedMessage);
+              // }
+              const { id, inputMap, outputMap } = parsedMessage;
+              const transaction = new Transaction({ id, inputMap, outputMap });
+
+              this.transactionPool.addTransaction(transaction);
               break;
 
             default:
@@ -111,11 +116,11 @@ export default class PubNubServer {
   broadcastBlockchain() {
     this.publish({
       channel: this.channels.BLOCKCHAIN,
-      message: this.blockchain,
+      message: this.blockchain.chain,
     });
   }
 
   broadcastTransaction(transaction) {
-    this.publish({ channel: this.channels.TRANSACTIONS, message: transaction });
+    this.publish({ channel: this.channels.TRANSACTION, message: transaction });
   }
 }
