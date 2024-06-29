@@ -17,7 +17,7 @@ transactionRouter.use(protectedAccess);
 transactionRouter.route('/').get(getTransactionPool);
 transactionRouter.route('/add').post(addTransaction);
 
-transactionRouter.use(authorizedAccess('manager', 'admin'));
+transactionRouter.use(authorizedAccess('user', 'manager', 'admin'));
 
 transactionRouter.route('/mine').get(mineTransactions);
 

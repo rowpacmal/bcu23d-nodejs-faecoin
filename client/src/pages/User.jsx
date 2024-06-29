@@ -1,26 +1,29 @@
 import { useEffect, useState } from 'react';
 import { getUserAccount } from '../services/userService';
-import { getWallet, mineTransactions } from '../services/transactionService';
+import { mineTransactions } from '../services/transactionService';
+import { getWalletBalance } from '../services/walletService';
 
 function User() {
   const [user, setUser] = useState({});
   const [wallet, setWallet] = useState({});
 
+  async function getUserInfo() {
+    const token = localStorage.getItem('TOKEN');
+
+    setUser(await getUserAccount(token));
+    setWallet(await getWalletBalance(token));
+  }
+
   useEffect(() => {
-    if (Object.values(user).length > 0) return;
-
-    async function getUserInfo() {
-      const token = localStorage.getItem('TOKEN');
-      setUser((await getUserAccount(token)).data);
-      setWallet((await getWallet(token)).data);
-    }
-
     getUserInfo();
-  });
+  }, []);
 
   async function mineNewBlock() {
     const token = localStorage.getItem('TOKEN');
+
     await mineTransactions(token);
+
+    getUserInfo();
   }
 
   return (
@@ -35,6 +38,8 @@ function User() {
         <li>{user?.name}</li>
 
         <li>{user?.email}</li>
+
+        <li>{user?.role}</li>
       </ul>
 
       <div>
