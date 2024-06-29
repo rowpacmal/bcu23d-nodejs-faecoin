@@ -16,7 +16,6 @@ const authRouter = express.Router();
 
 authRouter.route('/register').post(registerAccount);
 authRouter.route('/login').post(loginToAccount);
-
 authRouter.route('/token/:token').get(validAccountToken);
 
 authRouter.use(protectedAccess);
