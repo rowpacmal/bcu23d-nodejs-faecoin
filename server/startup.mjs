@@ -2,6 +2,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 import Blockchain from './models/Blockchain.mjs';
 import TransactionPool from './models/TransactionPool.mjs';
@@ -10,12 +11,18 @@ import PubNubServer from './models/PubNubServer.mjs';
 
 export let blockchain, transactionPool, wallet, pubnub;
 
-export const startup = async () => {
-  dotenv.config({ path: 'config/config.env' });
-  global.__rootdirname = path.dirname(fileURLToPath(import.meta.url));
-
+export const mongoDB = async () => {
   const mongo = await mongoose.connect(process.env.MONGODB_URI);
   console.log(`MongoDB connected to ${mongo.connection.host}`);
+};
+
+export const security = (app) => {
+  app.use(cors());
+};
+
+export const startup = () => {
+  dotenv.config({ path: 'config/config.env' });
+  global.__rootdirname = path.dirname(fileURLToPath(import.meta.url));
 
   const credentials = {
     publishKey: process.env.PUBNUB_PUB_KEY,

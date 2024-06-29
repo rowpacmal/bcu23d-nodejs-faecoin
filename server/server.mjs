@@ -1,6 +1,5 @@
 import express from 'express';
-import cors from 'cors';
-import { startup, synchronize } from './startup.mjs';
+import { mongoDB, security, startup, synchronize } from './startup.mjs';
 
 // import logHandler from './middlewares/logHandler.mjs';
 import errorHandler from './middlewares/errorHandler.mjs';
@@ -8,10 +7,13 @@ import mainRouter from './routes/mainRoutes.mjs';
 import resourceNotFound from './utils/resourceNotFound.mjs';
 
 startup();
+mongoDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+security(app);
+
 // app.use(logHandler);
 
 app.use('/api/v1', mainRouter);
@@ -23,6 +25,5 @@ const PORT = process.argv[2] || process.env.DEFAULT_PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
 
-  if (PORT !== process.env.DEFAULT_PORT) setTimeout(() => synchronize(), 1000);
-  // if (PORT !== process.env.DEFAULT_PORT) synchronize();
+  if (PORT !== process.env.DEFAULT_PORT) synchronize();
 });
