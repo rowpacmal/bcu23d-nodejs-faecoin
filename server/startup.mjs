@@ -10,16 +10,6 @@ import PubNubServer from './models/PubNubServer.mjs';
 
 export let blockchain, transactionPool, wallet, pubnub;
 
-const createInstance = async (Prototype) => {
-  let instance = await Prototype.findOne();
-
-  if (!instance) {
-    instance = await Prototype.create({});
-  }
-
-  return instance;
-};
-
 export const startup = async () => {
   dotenv.config({ path: 'config/config.env' });
   global.__rootdirname = path.dirname(fileURLToPath(import.meta.url));
@@ -34,7 +24,7 @@ export const startup = async () => {
     userId: process.env.PUBNUB_USER_ID,
   };
 
-  blockchain = await createInstance(Blockchain);
+  blockchain = new Blockchain();
   transactionPool = new TransactionPool();
   wallet = new Wallet();
   pubnub = new PubNubServer({
@@ -43,4 +33,18 @@ export const startup = async () => {
     wallet,
     credentials,
   });
+};
+
+export const synchronize = async () => {
+  let response = await fetch(`${process.env.DEFAULT_NODE}/api/v1/blockchain`);
+  if (response.ok) {
+    const result = await response.json();
+    blockchain.updateChain(result.data);
+  }
+
+  response = await fetch(`${process.env.DEFAULT_NODE}/api/v1/transactions`);
+  if (response.ok) {
+    const result = await response.json();
+    transactionPool.updateTransactionMap(result.data);
+  }
 };

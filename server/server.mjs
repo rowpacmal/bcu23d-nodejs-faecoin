@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { startup } from './startup.mjs';
+import { startup, synchronize } from './startup.mjs';
 
 // import logHandler from './middlewares/logHandler.mjs';
 import errorHandler from './middlewares/errorHandler.mjs';
@@ -19,10 +19,9 @@ app.all('*', resourceNotFound);
 
 app.use(errorHandler);
 
-const PORT = process.argv[2] || process.env.DEFAULT_PORT || 5050;
+const PORT = process.argv[2] || process.env.DEFAULT_PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
 
-  // setTimeout(() => pubsub.broadcast('DEMO', { node: PORT }), 1000);
-  // setTimeout(() => pubsub.broadcastBlockchain(), 1000);
+  if (PORT !== process.env.DEFAULT_PORT) setTimeout(() => synchronize(), 1000);
 });
