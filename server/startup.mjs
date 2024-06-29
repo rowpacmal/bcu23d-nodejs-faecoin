@@ -2,6 +2,11 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import rateLimit from 'express-rate-limit';
+import hpp from 'hpp';
 import cors from 'cors';
 
 import Blockchain from './models/Blockchain.mjs';
@@ -17,7 +22,17 @@ export const mongoDB = async () => {
 };
 
 export const security = (app) => {
+  const limit = rateLimit({
+    windowMs: 5 * 60 * 1000,
+    limit: 100,
+  });
+
+  // app.use(helmet({ contentSecurityPolicy: false }));
+  app.use(helmet());
+  app.use(xss());
+  app.use(limit);
   app.use(cors());
+  app.use(hpp());
 };
 
 export const startup = () => {
