@@ -27,7 +27,7 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const token = (await userSignIn(formData)).data;
+    const token = await userSignIn(formData);
     localStorage.setItem('TOKEN', token);
 
     setIsValid(true);

@@ -21,7 +21,7 @@ function Transaction() {
 
     console.log(txn);
 
-    setTransactions(txn.data);
+    setTransactions(txn);
   }
 
   function handleChange(e) {

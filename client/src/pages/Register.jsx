@@ -28,7 +28,7 @@ function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const token = (await userSignUp(formData)).data;
+    const token = await userSignUp(formData);
     localStorage.setItem('TOKEN', token);
 
     setIsValid(true);

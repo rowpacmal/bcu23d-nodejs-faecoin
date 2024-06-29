@@ -10,7 +10,8 @@ function App() {
   useEffect(() => {
     async function validToken() {
       const response = await validateToken(localStorage.getItem('TOKEN'));
-      setIsValid(response?.success ? true : false);
+
+      setIsValid(response ? true : false);
     }
 
     validToken();

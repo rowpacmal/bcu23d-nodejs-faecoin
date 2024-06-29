@@ -8,7 +8,7 @@ function Explorer() {
     if (blockchain.length > 0) return;
 
     async function getBlockchain() {
-      setBlockchain((await getAllBlocks()).data);
+      setBlockchain(await getAllBlocks());
     }
 
     getBlockchain();
