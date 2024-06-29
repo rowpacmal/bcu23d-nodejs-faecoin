@@ -17,7 +17,8 @@ export default class Blockchain {
 
   updateChain(chain, shouldValidate, callback) {
     if (chain.length <= this.chain.length) return;
-    if (!Blockchain.validateChain(chain)) return;
+
+    if (!this.constructor.validateChain(chain)) return;
 
     if (shouldValidate && !this.validateTransactionData({ chain })) return;
 

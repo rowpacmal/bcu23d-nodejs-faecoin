@@ -7,9 +7,7 @@ import ErrorResponse from '../models/ErrorResponse.mjs';
 export const addTransaction = (req, res, next) => {
   const { amount, recipient } = req.body;
 
-  let transaction = transactionPool.transactionExist({
-    address: wallet.publicKey,
-  });
+  let transaction = transactionPool.transactionExist(wallet.publicKey);
 
   try {
     if (transaction) {

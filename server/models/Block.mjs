@@ -15,7 +15,7 @@ export default class Block {
   static get genesis() {
     return new this({
       index: 1,
-      timestamp: Date.now(),
+      timestamp: 0,
       prevHash: '0',
       hash: '0',
       data: [],
