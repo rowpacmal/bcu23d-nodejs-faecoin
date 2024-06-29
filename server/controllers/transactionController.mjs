@@ -60,7 +60,7 @@ export const mineTransactions = async (req, res, next) => {
     blockchain,
     transactionPool,
     wallet,
-    pubsub: pubnub,
+    pubnub,
   });
 
   await miner.mineTransaction();
@@ -68,6 +68,6 @@ export const mineTransactions = async (req, res, next) => {
   res.status(200).json({
     success: true,
     statusCode: 200,
-    data: 'Funkar faktiskt hyfsat just nu.',
+    data: 'Successfully mined a block',
   });
 };

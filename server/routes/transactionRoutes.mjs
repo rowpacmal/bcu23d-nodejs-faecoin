@@ -12,13 +12,11 @@ import {
 
 const transactionRouter = express.Router();
 
+transactionRouter.route('/').get(getTransactionPool);
+
 transactionRouter.use(protectedAccess);
 
-transactionRouter.route('/').get(getTransactionPool);
 transactionRouter.route('/wallet').get(getWalletBalance);
-
-// transactionRouter.use(authorizedAccess('manager', 'admin'));
-
 transactionRouter.route('/add').post(addTransaction);
 transactionRouter.route('/mine').get(mineTransactions);
 
