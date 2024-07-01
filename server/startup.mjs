@@ -24,7 +24,7 @@ export const mongoDB = async () => {
 export const security = (app) => {
   const limit = rateLimit({
     windowMs: 5 * 60 * 1000,
-    limit: 100,
+    limit: 1000,
   });
 
   // app.use(helmet({ contentSecurityPolicy: false }));

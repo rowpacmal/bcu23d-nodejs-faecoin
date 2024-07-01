@@ -40,11 +40,11 @@ export const getMyAccount = asyncHandler(async (req, res, next) => {
 });
 
 export const updateAccountDetails = asyncHandler(async (req, res, next) => {
-  const { name, email } = req.body;
+  const { name, email, role } = req.body;
 
   await User.findByIdAndUpdate(
     req.user.id,
-    { name, email },
+    { name, email, role },
     {
       runValidators: true,
     }
