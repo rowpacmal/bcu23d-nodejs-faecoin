@@ -1,6 +1,10 @@
 .footer {
-  background-color: #def8df;
+  background-color: var(--light-primary-color);
   padding: 3rem 0;
   margin-top: auto;
   text-align: center;
+
+  p {
+    color: var(--secondary-text-color);
+  }
 }

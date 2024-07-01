@@ -7,6 +7,9 @@
   --primary-text-color: #161616;
   --secondary-text-color: #757575;
   --divider-color: #bdbdbd;
+  --border-color: #16161622;
+  --text-shadow: #16161644;
+  --box-shadow: #16161611;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -31,10 +34,21 @@
 }
 
 body {
+  overflow-y: scroll;
   margin: 0;
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+}
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+}
+body::-webkit-scrollbar-track {
+  background-color: var(--divider-color);
 }
 
 h1 {
@@ -44,26 +58,28 @@ h1 {
 
 a {
   font-weight: 500;
-  color: #11a418;
+  color: var(--primary-color);
   text-decoration: none;
 }
 a:hover {
-  color: #2fd520;
+  filter: brightness(1.1);
 }
 
 button {
   border-radius: 8px;
-  border: 2px solid transparent;
+  border: 1px solid var(--border-color);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #11a418;
+  background-color: var(--primary-color);
   cursor: pointer;
   transition: border-color 0.25s;
+  text-shadow: 0 0 4px var(--text-shadow);
+  box-shadow: 2px 2px 4px var(--box-shadow);
 }
 button:hover {
-  border-color: #fefefe66;
+  filter: brightness(1.1);
 }
 button:focus,
 button:focus-visible {
@@ -71,10 +87,28 @@ button:focus-visible {
 }
 button:disabled {
   cursor: default;
-  background-color: #1d451e;
+  color: var(--divider-color);
+  background-color: var(--dark-primary-color);
 }
 button:disabled:hover {
+  filter: brightness(1);
   border-color: transparent;
+}
+
+input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--primary-text-color);
+  background-color: var(--background-color);
+  box-shadow: inset 2px 2px 4px var(--box-shadow);
+}
+input::placeholder {
+  color: var(--divider-color);
 }
 
 ul {
@@ -89,8 +123,7 @@ ul {
 }
 
 .active span {
-  color: var(--primary-text-color);
-  text-decoration: underline;
+  color: var(--primary-color);
 }
 .active button {
   background-color: var(--primary-text-color);

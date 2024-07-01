@@ -2,14 +2,14 @@
   position: sticky;
   top: 0;
   background-color: var(--background-color);
-  padding: 1rem;
+  padding: 1rem 0;
   z-index: 999;
-  box-shadow: 0 4px 4px #10101010;
+  box-shadow: 0 4px 4px var(--box-shadow);
 }
 
 .container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   gap: 3rem;
 }
@@ -37,6 +37,15 @@
   display: flex;
   align-items: center;
   gap: 3rem;
+
+  li a {
+    color: var(--primary-text-color);
+    display: flex;
+    align-items: center;
+  }
+  li a:hover {
+    color: var(--primary-color);
+  }
 }
 
 .control {
