@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import Header from '../components/Layout/Header';
-import Footer from '../components/Layout/Footer';
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
 
-import generalStyle from '../styles/general.module.css';
 import style from '../styles/Main.module.css';
 
 function Layout() {
@@ -10,7 +9,7 @@ function Layout() {
     <>
       <Header />
 
-      <main className={`${generalStyle.container} ${style.main}`}>
+      <main className={style.main}>
         <Outlet />
       </main>
 
