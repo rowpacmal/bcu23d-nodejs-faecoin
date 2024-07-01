@@ -1,14 +1,20 @@
 :root {
-  --primary-color: #101010;
-  --secondary-color: #fefefe;
+  --primary-color: #4caf50;
+  --dark-primary-color: #388e3c;
+  --light-primary-color: #c8e6c9;
+  --accent-color: #ffc107;
+  --background-color: #fefefe;
+  --primary-text-color: #161616;
+  --secondary-text-color: #757575;
+  --divider-color: #bdbdbd;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: var(--primary-color);
-  background-color: var(--secondary-color);
+  color: var(--primary-text-color);
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -83,9 +89,9 @@ ul {
 }
 
 .active span {
-  color: var(--primary-color);
+  color: var(--primary-text-color);
   text-decoration: underline;
 }
 .active button {
-  background-color: var(--primary-color);
+  background-color: var(--primary-text-color);
 }

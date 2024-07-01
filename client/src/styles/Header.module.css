@@ -1,7 +1,7 @@
 .header {
   position: sticky;
   top: 0;
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   padding: 1rem;
   z-index: 999;
   box-shadow: 0 4px 4px #10101010;
@@ -18,7 +18,7 @@
   display: flex;
   place-items: center;
   gap: 1rem;
-  color: var(--primary-color);
+  color: var(--primary-text-color);
 
   img {
     width: 80px;
@@ -30,7 +30,7 @@
   }
 }
 .link:hover {
-  color: var(--primary-color);
+  color: var(--primary-text-color);
 }
 
 .ul {
