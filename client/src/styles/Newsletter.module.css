@@ -1,0 +1,39 @@
+.wrapper {
+  background-color: var(--light-primary-color);
+  padding: 3rem 0;
+}
+
+.section {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 1rem;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.message {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.policy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+
+  a {
+    text-decoration: underline;
+  }
+}

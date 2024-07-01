@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  place-items: center;
+  gap: 5rem;
+  padding: 0 3rem;
+
+  img {
+    width: auto;
+    max-height: 350px;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  p {
+    color: var(--secondary-text-color);
+  }
+}
+
+.button {
+  background-color: var(--accent-color);
+}
