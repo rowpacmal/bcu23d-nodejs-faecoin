@@ -1,8 +1,10 @@
 .header {
   position: sticky;
   top: 0;
-  background-color: aliceblue;
+  background-color: var(--secondary-color);
   padding: 1rem;
+  z-index: 999;
+  box-shadow: 0 4px 4px #10101010;
 }
 
 .container {

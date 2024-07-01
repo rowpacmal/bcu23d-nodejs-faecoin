@@ -63,6 +63,13 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+button:disabled {
+  cursor: default;
+  background-color: #1d451e;
+}
+button:disabled:hover {
+  border-color: transparent;
+}
 
 ul {
   list-style: none;
