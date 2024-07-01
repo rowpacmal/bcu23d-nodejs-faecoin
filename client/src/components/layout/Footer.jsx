@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className={style.footer}>
       <div className={generalStyle.container}>
-        <p>&copy; 2024, FaeCoin</p>
+        <p>&copy;2024 FaeCoin • A Magical World</p>
       </div>
     </footer>
   );
