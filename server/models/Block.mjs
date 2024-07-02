@@ -51,9 +51,11 @@ export default class Block {
   }
 
   static adjustDifficultyLevel(block, timestamp) {
-    if (timestamp - block.timestamp > +process.env.DEFAULT_MINE_RATE)
-      return block.difficulty - 1;
+    const { difficulty } = block;
 
-    return block.difficulty + 1;
+    if (timestamp - block.timestamp > +process.env.DEFAULT_MINE_RATE)
+      return difficulty !== 1 ? difficulty - 1 : difficulty;
+
+    return difficulty + 1;
   }
 }
