@@ -25,7 +25,7 @@ function Header() {
             width="100"
             height="100"
           />
-          <h1>Fae</h1>
+          <span>Fae</span>
         </Link>
 
         <nav>
@@ -38,13 +38,13 @@ function Header() {
 
             <li>
               <NavLink to="/explorer">
-                <span>Explorer</span>
+                <span>Explore</span>
               </NavLink>
             </li>
 
             <li>
               <NavLink to="/send">
-                <span>Transaction</span>
+                <span>Use</span>
               </NavLink>
             </li>
 

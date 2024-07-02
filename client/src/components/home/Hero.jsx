@@ -11,7 +11,7 @@ function Hero() {
   return (
     <div className={`${generalStyle.container} ${style.wrapper}`}>
       <section className={style.section}>
-        <h2>Unlock the Future of Finance with FaeCoin</h2>
+        <h1>Unlock the Future of Finance with FaeCoin</h1>
 
         <p>
           Welcome! Join us on a journey to revolutionize digital finance.
