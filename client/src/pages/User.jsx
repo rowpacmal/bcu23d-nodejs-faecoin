@@ -5,6 +5,7 @@ import { getWalletBalance } from '../services/walletService';
 
 import generalStyle from '../styles/general.module.css';
 import style from '../styles/User.module.css';
+import { IconHash } from '@tabler/icons-react';
 
 function User() {
   const [user, setUser] = useState({});
@@ -47,9 +48,10 @@ function User() {
           <h2>My Account</h2>
 
           <ul className={style.wallet}>
-            <li>{`${wallet?.address.slice(0, 4)}-${wallet?.address.slice(
-              -4
-            )}`}</li>
+            <li>
+              <IconHash />
+              {`${wallet?.address.slice(0, 4)}-${wallet?.address.slice(-4)}`}
+            </li>
 
             <li>{wallet?.balance.toFixed(2)} FAE</li>
           </ul>

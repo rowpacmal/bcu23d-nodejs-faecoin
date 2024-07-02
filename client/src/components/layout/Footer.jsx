@@ -31,7 +31,7 @@ function Footer() {
               </li>
 
               <li>
-                <Link>Sign up</Link>
+                <Link to="/register">Sign up</Link>
               </li>
 
               <li>

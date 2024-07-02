@@ -42,27 +42,13 @@ function Header() {
               </NavLink>
             </li>
 
-            <li>
-              <NavLink to="/send">
-                <span>Use</span>
-              </NavLink>
-            </li>
-
             <div className={style.control}>
               {!isValid ? (
-                <>
-                  <li>
-                    <NavLink to="/login">
-                      <button>Sign In</button>
-                    </NavLink>
-                  </li>
-
-                  <li>
-                    <NavLink to="/register">
-                      <button>Sign Up</button>
-                    </NavLink>
-                  </li>
-                </>
+                <li>
+                  <NavLink to="/login">
+                    <button>Join</button>
+                  </NavLink>
+                </li>
               ) : (
                 <>
                   <li>
