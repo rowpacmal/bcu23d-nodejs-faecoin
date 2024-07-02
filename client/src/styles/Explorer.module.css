@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 2rem;
+  box-shadow: 4px 4px 4px var(--box-shadow);
+}
+
+.button {
+  color: inherit;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: initial;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.active {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.explorer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.blocks {
+  padding-right: 1.5rem;
+}
+
+.overview {
+  padding-left: 2rem;
+  border-left: 2px solid var(--divider-color);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

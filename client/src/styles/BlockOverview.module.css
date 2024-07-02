@@ -1,0 +1,25 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+
+  li {
+    color: var(--secondary-text-color);
+    text-wrap: nowrap;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.divider {
+  margin: 0.4rem 0.2rem;
+  width: 100%;
+  border-bottom: 3px dotted var(--border-color);
+}
