@@ -1,37 +1,55 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .section {
   display: flex;
   justify-content: center;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  gap: 2rem;
+.box {
   border: 1px solid var(--border-color);
   border-radius: 0.8rem;
-  padding: 2rem 4rem;
+  padding: 2rem;
   box-shadow: 4px 4px 4px var(--box-shadow);
 }
 
 .wallet {
-  cursor: default;
-  display: flex;
-  background-color: var(--accent-color);
-  color: var(--background-color);
-  border-radius: 0.6rem;
-  padding: 1rem;
-  box-shadow: inset 0 -80px 30px -50px var(--text-shadow);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
-  li {
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  min-height: 600px;
+}
+
+.nav {
+  border-right: 2px solid var(--border-color);
+  padding-right: 1rem;
+
+  ul {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    font-size: 1.5rem;
+    flex-direction: column;
+    gap: 0.3rem;
   }
-  li:first-child {
-    border-right: 3px dotted var(--background-color);
+
+  li a {
+    display: block;
+    color: var(--primary-text-color);
+  }
+  li a:hover {
+    color: var(--primary-color);
+  }
+  li a span {
+    display: block;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
   }
 }
 
@@ -47,9 +65,21 @@
 }
 
 .label {
-  text-align: center;
   color: var(--divider-color);
   font-size: 0.8rem;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid var(--border-color);
+  padding-right: 2rem;
+}
+
+.balance {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
 }
 
 .span {
@@ -63,4 +93,8 @@
 .buttons {
   display: flex;
   gap: 2rem;
+}
+
+.big {
+  font-size: 1.2rem;
 }

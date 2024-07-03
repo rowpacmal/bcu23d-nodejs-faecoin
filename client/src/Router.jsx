@@ -7,8 +7,10 @@ import Explore from './pages/Explore';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Transaction from './pages/Transaction';
 import User from './pages/User';
+import Welcome from './pages/Welcome';
+import Profile from './pages/Profile';
+import Transaction from './pages/Transaction';
 
 export const router = createBrowserRouter([
   {
@@ -29,13 +31,32 @@ export const router = createBrowserRouter([
         path: '/explore',
         element: <Explore />,
       },
-      {
-        path: '/send',
-        element: <Transaction />,
-      },
+
       {
         path: '/me',
         element: <User />,
+        children: [
+          {
+            index: true,
+            element: <Welcome />,
+          },
+          {
+            path: '/me/overview',
+            element: <Profile />,
+          },
+          {
+            path: '/me/exchange',
+            element: <h2>Exchange</h2>,
+          },
+          {
+            path: '/me/send',
+            element: <Transaction />,
+          },
+          {
+            path: '/me/stake',
+            element: <h2>Stake</h2>,
+          },
+        ],
       },
     ],
   },

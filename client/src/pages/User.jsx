@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 import { editUserDetails, getUserAccount } from '../services/userService';
 import { mineTransactions } from '../services/transactionService';
 import { getWalletBalance } from '../services/walletService';
 
 import generalStyle from '../styles/general.module.css';
 import style from '../styles/User.module.css';
-import { IconHash } from '@tabler/icons-react';
 
 function User() {
   const [user, setUser] = useState({});
@@ -42,57 +43,58 @@ function User() {
   }
 
   return (
-    <div className={generalStyle.container}>
-      <section className={style.section}>
-        <div className={style.wrapper}>
-          <h2>My Account</h2>
-
-          <ul className={style.wallet}>
-            <li>
-              <IconHash />
-              {`${wallet?.address.slice(0, 4)}-${wallet?.address.slice(-4)}`}
-            </li>
-
-            <li>{wallet?.balance.toFixed(2)} FAE</li>
-          </ul>
-
-          <ul className={style.info}>
-            <li>
-              <span className={style.label}>Name</span>
-
-              <span className={style.span}>{user?.name}</span>
-            </li>
-
-            <li>
-              <span className={style.label}>Email</span>
-
-              <span className={style.span}>{user?.email}</span>
-            </li>
-
-            <li>
-              <span className={style.label}>Role</span>
-
-              <span className={style.span}>{user?.role}</span>
-            </li>
-          </ul>
-
-          <div className={style.buttons}>
-            <button
-              onClick={handleUpgradeAccount}
-              disabled={user?.role !== 'user' ? true : false}
-            >
-              Upgrade
-            </button>
-
-            <button
-              onClick={handleMineBlock}
-              disabled={user?.role !== 'user' ? false : true}
-            >
-              Mine Block
-            </button>
-          </div>
+    <div className={`${generalStyle.container} ${style.wrapper}`}>
+      <div className={`${style.box} ${style.wallet}`}>
+        <div className={style.address}>
+          <span className={style.label}>Wallet address</span>
+          <span className={`${style.span} ${style.big}`}>
+            {wallet?.address?.slice(0, 12)}...
+          </span>
         </div>
-      </section>
+
+        <div className={style.balance}>
+          <span className={style.label}>Balance</span>
+          <span className={`${style.span} ${style.big}`}>
+            {wallet?.balance?.toFixed(2)}
+          </span>
+        </div>
+      </div>
+
+      <div className={`${style.box} ${style.profile}`}>
+        <nav className={style.nav}>
+          <ul>
+            <li>
+              <NavLink to="/me/overview">
+                <span className="account">Profile</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/me/exchange">
+                <span className="account">Exchange</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/me/send">
+                <span className="account">Send & Receive</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/me/stake">
+                <span className="account">Stake</span>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+
+        <section className={style.section}>
+          <UserContext.Provider value={{ user }}>
+            <Outlet />
+          </UserContext.Provider>
+        </section>
+      </div>
     </div>
   );
 }
