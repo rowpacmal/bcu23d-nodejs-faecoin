@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { userSignUp } from '../services/userService';
+import { IconEye, IconEyeClosed } from '@tabler/icons-react';
 import updateFormData from '../utils/updateFormData';
 import GlobalContext from '../contexts/GlobalContext';
 
@@ -17,6 +18,7 @@ function Register() {
   });
   const [warning, setWarning] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [toggleEye, setToggleEye] = useState(false);
 
   useEffect(() => {
     if (isValid) {
@@ -53,6 +55,10 @@ function Register() {
     }
   }
 
+  function handleToggleEye() {
+    setToggleEye(!toggleEye);
+  }
+
   return (
     <section className={`${generalStyle.container} ${style.section}`}>
       <h2>Sign Up</h2>
@@ -86,12 +92,16 @@ function Register() {
           </div>
 
           <div className={style.input}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password </label>
+
+            <span className={style.eye} onClick={handleToggleEye}>
+              {!toggleEye ? <IconEye size={20} /> : <IconEyeClosed size={20} />}
+            </span>
 
             <input
               id="password"
               name="password"
-              type="password"
+              type={!toggleEye ? 'password' : 'text'}
               placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
@@ -113,6 +123,11 @@ function Register() {
               Create
             </button>
           </div>
+
+          <p className={style.text}>
+            <input type="checkbox" name="newsletter" /> By signing up, you agree
+            to our <Link>Terms of Use</Link>.
+          </p>
 
           <p className={style.text}>
             <input type="checkbox" name="newsletter" /> Get the latest updates

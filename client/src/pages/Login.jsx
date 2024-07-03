@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { userSignIn } from '../services/userService';
+import { IconEye, IconEyeClosed } from '@tabler/icons-react';
 import updateFormData from '../utils/updateFormData';
 import GlobalContext from '../contexts/GlobalContext';
 
@@ -16,6 +17,7 @@ function Login() {
   });
   const [warning, setWarning] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [toggleEye, setToggleEye] = useState(false);
 
   useEffect(() => {
     if (isValid) {
@@ -52,6 +54,10 @@ function Login() {
     }
   }
 
+  function handleToggleEye() {
+    setToggleEye(!toggleEye);
+  }
+
   return (
     <section className={`${generalStyle.container} ${style.section}`}>
       <h2>Sign In</h2>
@@ -74,10 +80,14 @@ function Login() {
           <div className={style.input}>
             <label htmlFor="password">Password</label>
 
+            <span className={style.eye} onClick={handleToggleEye}>
+              {!toggleEye ? <IconEye size={20} /> : <IconEyeClosed size={20} />}
+            </span>
+
             <input
               id="password"
               name="password"
-              type="password"
+              type={!toggleEye ? 'password' : 'text'}
               placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
