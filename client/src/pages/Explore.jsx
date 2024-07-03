@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getAllBlocks } from '../services/blockchainService';
-import LatestBlocks from '../components/explorer/LatestBlocks';
+import LatestBlocks from '../components/explore/LatestBlocks';
 
 import generalStyle from '../styles/general.module.css';
-import style from '../styles/Explorer.module.css';
-import BlockOverview from '../components/explorer/BlockOverview';
+import style from '../styles/Explore.module.css';
+import BlockOverview from '../components/explore/BlockOverview';
 
-function Explorer() {
+function Explore() {
   const [blockchain, setBlockchain] = useState([]);
   const [activeBlock, setActiveBlock] = useState({});
   const [toggle, setToggle] = useState(false);
@@ -74,4 +74,4 @@ function Explorer() {
   );
 }
 
-export default Explorer;
+export default Explore;

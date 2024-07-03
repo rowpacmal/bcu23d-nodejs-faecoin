@@ -1,18 +1,18 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import generalStyle from '../../styles/general.module.css';
-import style from '../../styles/Header.module.css';
 import { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { IconLogout, IconUserCircle } from '@tabler/icons-react';
 import GlobalContext from '../../contexts/GlobalContext';
 
+import generalStyle from '../../styles/general.module.css';
+import style from '../../styles/Header.module.css';
+
 function Header() {
-  const navigate = useNavigate();
   const { isValid, setIsValid } = useContext(GlobalContext);
 
   function handleSignOut() {
     localStorage.removeItem('TOKEN');
 
     setIsValid(false);
-    navigate('/');
   }
 
   return (
@@ -30,40 +30,39 @@ function Header() {
 
         <nav>
           <ul className={style.ul}>
-            <li>
+            <li className={style.li}>
               <NavLink to="/">
                 <span>Home</span>
               </NavLink>
             </li>
 
-            <li>
-              <NavLink to="/explorer">
+            <li className={style.li}>
+              <NavLink to="/explore">
                 <span>Explore</span>
               </NavLink>
             </li>
 
             <div className={style.control}>
               {!isValid ? (
-                <li>
+                <li className={style.li}>
                   <NavLink to="/login">
                     <button>Join</button>
                   </NavLink>
                 </li>
               ) : (
                 <>
-                  <li>
+                  <li className={style.li}>
                     <NavLink to="/me">
-                      <img
-                        src="./src/assets/avatar.svg"
-                        alt=""
-                        width="30"
-                        height="30"
-                      />
+                      <span>
+                        <IconUserCircle size={32} stroke={1.75} />
+                      </span>
                     </NavLink>
                   </li>
 
-                  <li>
-                    <button onClick={handleSignOut}>Sign Out</button>
+                  <li className={style.li}>
+                    <Link to="/" onClick={handleSignOut}>
+                      <IconLogout size={32} stroke={1.75} />
+                    </Link>
                   </li>
                 </>
               )}

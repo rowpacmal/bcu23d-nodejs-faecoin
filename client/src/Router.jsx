@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Layout from './pages/Layout';
-import NotFound from './pages/NotFound';
+import Missing from './pages/Missing';
 
-import Explorer from './pages/Explorer';
+import Explore from './pages/Explore';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <NotFound />,
+    errorElement: <Missing />,
     children: [
       { index: true, element: <Home /> },
       {
@@ -26,8 +26,8 @@ export const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: '/explorer',
-        element: <Explorer />,
+        path: '/explore',
+        element: <Explore />,
       },
       {
         path: '/send',
