@@ -50,14 +50,20 @@
   gap: 1rem;
 }
 
-.signup {
+.button {
   background-color: var(--accent-color);
 }
 
-.welcome {
+.text {
   color: var(--secondary-text-color);
   font-size: 0.8rem;
   text-align: center;
+
+  input {
+    width: auto;
+    vertical-align: middle;
+    margin-bottom: 2px;
+  }
 }
 
 .warning {
@@ -66,7 +72,7 @@
   padding: 0.3rem 1.2rem;
   border: 1px solid var(--border-color);
   border-radius: 0.3rem;
-  transition: opacity 2s ease-in-out;
+  transition: opacity 1s ease-in-out;
   opacity: 0;
 }
 

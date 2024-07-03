@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userSignIn } from '../services/userService';
 import updateFormData from '../utils/updateFormData';
 import GlobalContext from '../contexts/GlobalContext';
 
 import generalStyle from '../styles/general.module.css';
-import style from '../styles/Login.module.css';
+import style from '../styles/Form.module.css';
 
 function Login() {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ function Login() {
       setTimeout(() => {
         setIsVisible(false);
 
-        setTimeout(() => setWarning(null), 2000);
+        setTimeout(() => setWarning(null), 1000);
       }, 3000);
     }
   }
@@ -60,11 +60,12 @@ function Login() {
         <div className={style.fields}>
           <div className={style.input}>
             <label htmlFor="email">Email</label>
+
             <input
               id="email"
               name="email"
               type="email"
-              placeholder="Email address"
+              placeholder="Enter email address"
               value={formData.email}
               onChange={handleChange}
             />
@@ -72,11 +73,12 @@ function Login() {
 
           <div className={style.input}>
             <label htmlFor="password">Password</label>
+
             <input
               id="password"
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
             />
@@ -89,14 +91,16 @@ function Login() {
           </p>
 
           <div className={style.buttons}>
-            <button>Sign In</button>
+            <button type="submit">Sign In</button>
 
-            <NavLink to="/register">
-              <button className={style.signup}>Sign Up</button>
-            </NavLink>
+            <Link to="/register">
+              <button type="button" className={style.button}>
+                Sign Up
+              </button>
+            </Link>
           </div>
 
-          <p className={style.welcome}>
+          <p className={style.text}>
             Forgot your password? <Link>Reset it by clicking here</Link>.
           </p>
         </div>
