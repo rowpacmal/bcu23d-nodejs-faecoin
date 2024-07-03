@@ -39,7 +39,7 @@ function Login() {
       localStorage.setItem('TOKEN', token);
 
       setIsValid(true);
-      navigate('/');
+      navigate('/me');
     } catch (error) {
       if (warning) return;
 

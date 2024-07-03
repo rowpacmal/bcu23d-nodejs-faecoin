@@ -130,3 +130,7 @@ ul {
 .active button {
   background-color: var(--primary-text-color);
 }
+.active .account {
+  background-color: var(--light-primary-color);
+  border: 1px solid var(--border-color);
+}

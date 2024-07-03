@@ -20,7 +20,7 @@ function Hero() {
         </p>
 
         <div>
-          <Link to={isValid ? '/me' : '/register'}>
+          <Link to={isValid ? '/me' : '/login'}>
             <button className={style.button}>Let&apos;s get started</button>
           </Link>
         </div>
