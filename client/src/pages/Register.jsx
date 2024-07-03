@@ -1,8 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userSignUp } from '../services/userService';
 import updateFormData from '../utils/updateFormData';
 import GlobalContext from '../contexts/GlobalContext';
+
+import generalStyle from '../styles/general.module.css';
+import style from '../styles/Form.module.css';
 
 function Register() {
   const navigate = useNavigate();
@@ -12,6 +15,8 @@ function Register() {
     email: '',
     password: '',
   });
+  const [warning, setWarning] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (isValid) {
@@ -28,61 +33,92 @@ function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const token = await userSignUp(formData);
-    localStorage.setItem('TOKEN', token);
+    try {
+      const token = await userSignUp(formData);
+      localStorage.setItem('TOKEN', token);
 
-    setIsValid(true);
-    navigate('/');
+      setIsValid(true);
+      navigate('/');
+    } catch (error) {
+      if (warning) return;
+
+      setWarning(error.message);
+      setIsVisible(true);
+
+      setTimeout(() => {
+        setIsVisible(false);
+
+        setTimeout(() => setWarning(null), 1000);
+      }, 3000);
+    }
   }
 
   return (
-    <section>
+    <section className={`${generalStyle.container} ${style.section}`}>
       <h2>Sign Up</h2>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Name
-            <br />
+      <form onSubmit={handleSubmit} className={style.form}>
+        <div className={style.fields}>
+          <div className={style.input}>
+            <label htmlFor="name">Name</label>
+
             <input
+              id="name"
               name="name"
               type="text"
-              placeholder="Full name..."
+              placeholder="Enter full name"
               value={formData.name}
               onChange={handleChange}
             />
-          </label>
-        </div>
+          </div>
 
-        <div>
-          <label>
-            Email
-            <br />
+          <div className={style.input}>
+            <label htmlFor="email">Email</label>
+
             <input
+              id="email"
               name="email"
-              type="text"
-              placeholder="Email address..."
+              type="email"
+              placeholder="Enter email address"
               value={formData.email}
               onChange={handleChange}
             />
-          </label>
-        </div>
+          </div>
 
-        <div>
-          <label>
-            Password
-            <br />
+          <div className={style.input}>
+            <label htmlFor="password">Password</label>
+
             <input
+              id="password"
               name="password"
               type="password"
-              placeholder="Password..."
+              placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
             />
-          </label>
+          </div>
         </div>
 
-        <button>Create</button>
+        <div className={style.control}>
+          <p className={`${style.warning}${isVisible ? ` ${style.show}` : ''}`}>
+            {warning}
+          </p>
+
+          <div className={style.buttons}>
+            <Link to="/login">
+              <button type="button">Back</button>
+            </Link>
+
+            <button type="submit" className={style.button}>
+              Create
+            </button>
+          </div>
+
+          <p className={style.text}>
+            <input type="checkbox" name="newsletter" /> Get the latest updates
+            and exclusive offers directly in your inbox. Don&apos;t miss out!
+          </p>
+        </div>
       </form>
     </section>
   );
