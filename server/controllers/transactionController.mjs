@@ -7,6 +7,11 @@ import ErrorResponse from '../models/ErrorResponse.mjs';
 export const addTransaction = (req, res, next) => {
   const { amount, recipient } = req.body;
 
+  if (!amount || !recipient)
+    return next(
+      new ErrorResponse('Invalid request, Amount and Recipient expected', 400)
+    );
+
   let transaction = transactionPool.transactionExist(wallet.publicKey);
 
   try {
