@@ -75,6 +75,7 @@ function Register() {
               placeholder="Enter full name"
               value={formData.name}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -88,6 +89,7 @@ function Register() {
               placeholder="Enter email address"
               value={formData.email}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -105,6 +107,7 @@ function Register() {
               placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
+              required
             />
           </div>
         </div>
