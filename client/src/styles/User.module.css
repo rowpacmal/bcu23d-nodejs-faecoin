@@ -6,7 +6,17 @@
 
 .section {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 2rem;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
 }
 
 .box {
@@ -16,10 +26,17 @@
   box-shadow: 4px 4px 4px var(--box-shadow);
 }
 
+.walletBox {
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1rem;
+  box-shadow: 4px 4px 4px var(--box-shadow);
+}
+
 .wallet {
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 4fr 4fr 1fr;
 }
 
 .profile {
@@ -65,21 +82,31 @@
 }
 
 .label {
+  user-select: none;
+  text-align: center;
   color: var(--divider-color);
   font-size: 0.8rem;
+}
+
+.icon {
+  color: var(--divider-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0.7;
 }
 
 .address {
   display: flex;
   flex-direction: column;
   border-right: 2px solid var(--border-color);
-  padding-right: 2rem;
+  padding-right: 1rem;
 }
 
 .balance {
   display: flex;
   flex-direction: column;
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 
 .span {

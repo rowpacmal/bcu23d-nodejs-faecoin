@@ -134,3 +134,6 @@ ul {
   background-color: var(--light-primary-color);
   border: 1px solid var(--border-color);
 }
+.active:hover {
+  filter: brightness(1);
+}
