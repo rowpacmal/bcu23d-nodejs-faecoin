@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import { IconCoins, IconWallet } from '@tabler/icons-react';
 import UserContext from '../contexts/UserContext';
+
 import { editUserDetails, getUserAccount } from '../services/userService';
 import { mineTransactions } from '../services/transactionService';
 import { getWalletBalance } from '../services/walletService';
@@ -43,59 +45,63 @@ function User() {
   }
 
   return (
-    <div className={`${generalStyle.container} ${style.wrapper}`}>
-      <div className={`${style.box} ${style.wallet}`}>
-        <div className={style.address}>
-          <span className={style.label}>Wallet address</span>
-          <span className={`${style.span} ${style.big}`}>
-            {wallet?.address?.slice(0, 12)}...
-          </span>
+    <>
+      <div className={`${generalStyle.container} ${style.wrapper}`}>
+        <div className={`${style.walletBox} ${style.wallet}`}>
+          <div className={style.icon}>
+            <IconWallet size={40} />
+          </div>
+
+          <div className={style.address}>
+            <span className={style.label}>Wallet address</span>
+            <span className={`${style.span} ${style.big}`}>
+              {wallet?.address?.slice(0, 12)}...
+            </span>
+          </div>
+
+          <div className={style.balance}>
+            <span className={style.label}>Balance</span>
+            <span className={`${style.span} ${style.big}`}>
+              {wallet?.balance?.toFixed(2)}
+            </span>
+          </div>
+
+          <div className={style.icon}>
+            <IconCoins size={40} />
+          </div>
         </div>
 
-        <div className={style.balance}>
-          <span className={style.label}>Balance</span>
-          <span className={`${style.span} ${style.big}`}>
-            {wallet?.balance?.toFixed(2)}
-          </span>
+        <div className={`${style.box} ${style.profile}`}>
+          <nav className={style.nav}>
+            <ul>
+              <li>
+                <NavLink to="/me/overview">
+                  <span className="account">Profile</span>
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/me/exchange">
+                  <span className="account">Exchange</span>
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/me/stake">
+                  <span className="account">Stake</span>
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+
+          <section className={style.section}>
+            <UserContext.Provider value={{ user }}>
+              <Outlet />
+            </UserContext.Provider>
+          </section>
         </div>
       </div>
-
-      <div className={`${style.box} ${style.profile}`}>
-        <nav className={style.nav}>
-          <ul>
-            <li>
-              <NavLink to="/me/overview">
-                <span className="account">Profile</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/me/exchange">
-                <span className="account">Exchange</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/me/send">
-                <span className="account">Send & Receive</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/me/stake">
-                <span className="account">Stake</span>
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-
-        <section className={style.section}>
-          <UserContext.Provider value={{ user }}>
-            <Outlet />
-          </UserContext.Provider>
-        </section>
-      </div>
-    </div>
+    </>
   );
 }
 

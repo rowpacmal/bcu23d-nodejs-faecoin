@@ -1,28 +1,26 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import updateFormData from '../utils/updateFormData';
-import { Link } from 'react-router-dom';
+import { addTransaction } from '../services/transactionService';
+
+import formStyle from '../styles/Form.module.css';
+import style from '../styles/Transaction.module.css';
 import {
-  addTransaction,
-  getTransactions,
-} from '../services/transactionService';
-import GlobalContext from '../contexts/GlobalContext';
+  IconArrowDown,
+  IconArrowUpRight,
+  IconMinus,
+  IconPlus,
+  IconRefresh,
+  IconReplace,
+} from '@tabler/icons-react';
+import { NavLink, Outlet } from 'react-router-dom';
 
 function Transaction() {
-  const { isValid } = useContext(GlobalContext);
   const [formData, setFormData] = useState({
     recipient: '',
     amount: '',
   });
-  const [transactions, setTransactions] = useState({});
-
-  async function handleTransactionPool() {
-    const token = localStorage.getItem('TOKEN');
-    const txn = await getTransactions(token);
-
-    console.log(txn);
-
-    setTransactions(txn);
-  }
+  const [warning, setWarning] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   function handleChange(e) {
     updateFormData(e, formData, setFormData);
@@ -31,69 +29,103 @@ function Transaction() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const token = localStorage.getItem('TOKEN');
-    const data = { ...formData, amount: +formData.amount };
+    try {
+      const token = localStorage.getItem('TOKEN');
+      const data = {
+        recipient: formData.recipient,
+        amount: +formData.amount,
+      };
 
-    await addTransaction(token, data);
+      await addTransaction(token, data);
 
-    setFormData({
-      recipient: '',
-      amount: '',
-    });
+      setFormData({
+        recipient: '',
+        amount: '',
+      });
+    } catch (error) {
+      if (warning) return;
+
+      setWarning(error.message);
+      setIsVisible(true);
+
+      setTimeout(() => {
+        setIsVisible(false);
+
+        setTimeout(() => setWarning(null), 1000);
+      }, 3000);
+    }
   }
 
   return (
-    <section>
-      <h2>Transaction</h2>
-      <section>
-        <h3>Send Transaction</h3>
+    <>
+      <h2>
+        <IconReplace />
+        Exchange
+      </h2>
 
-        {isValid ? (
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>
-                Recipient
-                <br />
-                <input
-                  name="recipient"
-                  type="text"
-                  placeholder="Recipient's wallet address..."
-                  value={formData.recipient}
-                  onChange={handleChange}
-                />
-              </label>
-            </div>
+      <div className={style.wrapper}>
+        <Outlet />
 
-            <div>
-              <label>
-                Amount
-                <br />
-                <input
-                  name="amount"
-                  type="number"
-                  placeholder="0.00 Fae"
-                  value={formData.amount}
-                  onChange={handleChange}
-                />
-              </label>
-            </div>
+        <nav className={style.nav}>
+          <ul className={style.ul}>
+            <li>
+              <NavLink to="/me/exchange/buy">
+                <span className={`account ${style.span}`}>
+                  <div className={style.icon}>
+                    <IconPlus size={16} />
+                    Buy
+                  </div>
+                </span>
+              </NavLink>
+            </li>
 
-            <button>Send</button>
-          </form>
-        ) : (
-          <p>
-            To continue, please <Link to="/login">sign in</Link> to your
-            existing account or <Link to="/register">create</Link> a new one.
-          </p>
-        )}
-      </section>
+            <li>
+              <NavLink to="/me/exchange/sell">
+                <span className={`account ${style.span}`}>
+                  <div className={style.icon}>
+                    <IconMinus size={16} />
+                    Sell
+                  </div>
+                </span>
+              </NavLink>
+            </li>
 
-      <section>
-        <h3>Latest Transactions</h3>
+            <li>
+              <NavLink to="/me/exchange/swap">
+                <span className={`account ${style.span}`}>
+                  <div className={style.icon}>
+                    <IconRefresh size={16} />
+                    Swap
+                  </div>
+                </span>
+              </NavLink>
+            </li>
 
-        <ul></ul>
-      </section>
-    </section>
+            <li>
+              <NavLink to="/me/exchange/send">
+                <span className={`account ${style.span}`}>
+                  <div className={style.icon}>
+                    <IconArrowUpRight size={16} />
+                    Send
+                  </div>
+                </span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/me/exchange/receive">
+                <span className={`account ${style.span}`}>
+                  <div className={style.icon}>
+                    <IconArrowDown size={16} />
+                    Receive
+                  </div>
+                </span>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </>
   );
 }
 

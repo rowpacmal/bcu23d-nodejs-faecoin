@@ -5,6 +5,10 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    const regex = /overview|exchange|stake/i;
+
+    if (regex.test(pathname)) return;
+
     window.scrollTo(0, 0);
   }, [pathname]);
 
