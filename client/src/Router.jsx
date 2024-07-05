@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import Transaction from './pages/Transaction';
 import Send from './pages/exchange/Send';
 import Demo from './pages/Demo';
+import Stake from './pages/Stake';
 
 export const router = createBrowserRouter([
   {
@@ -78,7 +79,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/me/stake',
-            element: <h2>Stake</h2>,
+            element: <Stake />,
           },
         ],
       },
