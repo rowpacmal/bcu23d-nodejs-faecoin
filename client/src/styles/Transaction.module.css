@@ -66,17 +66,5 @@
 }
 
 .tip {
-  max-width: 512px;
   margin-top: 3rem;
-  background-color: var(--light-primary-color);
-  font-size: 0.8rem;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--border-color);
-}
-
-.embolden {
-  font-weight: bold;
-  text-transform: uppercase;
-  color: var(--primary-color);
 }

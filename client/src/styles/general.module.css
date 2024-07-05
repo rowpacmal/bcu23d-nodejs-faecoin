@@ -3,3 +3,18 @@
   width: 100%;
   margin: 0 auto;
 }
+
+.alert {
+  height: min-content;
+  background-color: var(--light-primary-color);
+  font-size: 0.8rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.embolden {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}

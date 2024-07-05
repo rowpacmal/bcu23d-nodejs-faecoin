@@ -103,6 +103,12 @@
   padding-right: 1rem;
 }
 
+.addressWrapper {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
 .balance {
   display: flex;
   flex-direction: column;
