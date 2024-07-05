@@ -5,13 +5,22 @@ import { useEffect, useState } from 'react';
 import { validateToken } from './services/userService';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     async function validToken() {
-      const response = await validateToken(localStorage.getItem('TOKEN'));
+      setIsLoading(true);
 
-      setIsValid(response ? true : false);
+      try {
+        const response = await validateToken(localStorage.getItem('TOKEN'));
+
+        setIsValid(response ? true : false);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     validToken();
@@ -19,7 +28,7 @@ function App() {
 
   return (
     <>
-      <GlobalContext.Provider value={{ isValid, setIsValid }}>
+      <GlobalContext.Provider value={{ isLoading, isValid, setIsValid }}>
         <RouterProvider router={router} />
       </GlobalContext.Provider>
     </>

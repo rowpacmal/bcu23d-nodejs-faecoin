@@ -56,14 +56,18 @@
 }
 
 .control {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  min-width: 72px;
 
   li a {
     display: flex;
     place-items: center;
   }
+}
+
+.buttons {
+  display: flex;
+  place-items: center;
+  gap: 0.5rem;
 }
 
 .logout {
