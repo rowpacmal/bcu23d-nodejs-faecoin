@@ -1,0 +1,14 @@
+import generalStyle from '../styles/general.module.css';
+
+function Demo() {
+  return (
+    <p className={generalStyle.alert}>
+      <span className={generalStyle.embolden}>Alert</span> Thank you for trying
+      out our app! Please note that the section you&apos;re trying to access is
+      currently under development. This app is a demo created for educational
+      purposes. We appreciate your understanding and patience.
+    </p>
+  );
+}
+
+export default Demo;

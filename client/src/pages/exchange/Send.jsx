@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { IconArrowUpRight } from '@tabler/icons-react';
+
 import updateFormData from '../../utils/updateFormData';
 import { addTransaction } from '../../services/transactionService';
 
+import generalStyle from '../../styles/general.module.css';
 import formStyle from '../../styles/Form.module.css';
 import style from '../../styles/Transaction.module.css';
-import { IconArrowUpRight } from '@tabler/icons-react';
 
 function Send() {
   const [formData, setFormData] = useState({
@@ -106,14 +108,14 @@ function Send() {
         </div>
       </form>
 
-      <p className={style.tip}>
-        <span className={style.embolden}>Tip</span> To add a transaction on the
-        Fae chain, enter the recipient, and amount details. Once submitted, the
-        transaction will be validated and added to the transaction pool. After
-        the block is mined, your transaction will be permanently recorded on the
-        blockchain, ensuring it is secure and transparent. The new block will
-        then be broadcast to all nodes in the network to keep everything in
-        sync.
+      <p className={`${generalStyle.alert} ${style.tip}`}>
+        <span className={generalStyle.embolden}>Tip</span> To add a transaction
+        on the Fae chain, enter the recipient, and amount details. Once
+        submitted, the transaction will be validated and added to the
+        transaction pool. After the block is mined, your transaction will be
+        permanently recorded on the blockchain, ensuring it is secure and
+        transparent. The new block will then be broadcast to all nodes in the
+        network to keep everything in sync.
       </p>
     </section>
   );

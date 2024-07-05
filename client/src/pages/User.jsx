@@ -55,7 +55,7 @@ function User() {
           <div className={style.address}>
             <span className={style.label}>Wallet address</span>
             <span className={`${style.span} ${style.big}`}>
-              {wallet?.address?.slice(0, 12)}...
+              <div className={style.addressWrapper}>{wallet?.address}</div>
             </span>
           </div>
 

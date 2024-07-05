@@ -12,6 +12,7 @@ import Welcome from './pages/Welcome';
 import Profile from './pages/Profile';
 import Transaction from './pages/Transaction';
 import Send from './pages/exchange/Send';
+import Demo from './pages/Demo';
 
 export const router = createBrowserRouter([
   {
@@ -55,15 +56,15 @@ export const router = createBrowserRouter([
               },
               {
                 path: '/me/exchange/buy',
-                element: <h3>Buy</h3>,
+                element: <Demo />,
               },
               {
                 path: '/me/exchange/sell',
-                element: <h3>Sell</h3>,
+                element: <Demo />,
               },
               {
                 path: '/me/exchange/swap',
-                element: <h3>Swap</h3>,
+                element: <Demo />,
               },
               {
                 path: '/me/exchange/send',
@@ -71,7 +72,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: '/me/exchange/receive',
-                element: <h3>Receive</h3>,
+                element: <Demo />,
               },
             ],
           },
