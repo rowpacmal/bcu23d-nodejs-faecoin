@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { userSignIn } from '../services/userService';
 import { IconEye, IconEyeClosed } from '@tabler/icons-react';
-import updateFormData from '../utils/updateFormData';
+
+import { userSignIn } from '../services/userService';
+import { signFormData, updateFormData } from '../utils/formDataHandler';
 import AppContext from '../contexts/AppContext';
 
 import generalStyle from '../styles/general.module.css';
@@ -11,13 +12,14 @@ import style from '../styles/Form.module.css';
 function Login() {
   const navigate = useNavigate();
   const { isValid, setIsValid, getUserInfo } = useContext(AppContext);
+
+  const [warning, setWarning] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [toggleEye, setToggleEye] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-  const [warning, setWarning] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [toggleEye, setToggleEye] = useState(false);
 
   useEffect(() => {
     if (isValid) {
@@ -28,31 +30,21 @@ function Login() {
   });
 
   function handleChange(e) {
-    updateFormData(e, formData, setFormData);
+    updateFormData({ e, formData, setFormData });
   }
 
   async function handleSubmit(e) {
-    e.preventDefault();
-
-    try {
-      const token = await userSignIn(formData);
-      localStorage.setItem('TOKEN', token);
-
-      getUserInfo();
-      setIsValid(true);
-      navigate('/me');
-    } catch (error) {
-      if (warning) return;
-
-      setWarning(error.message);
-      setIsVisible(true);
-
-      setTimeout(() => {
-        setIsVisible(false);
-
-        setTimeout(() => setWarning(null), 1000);
-      }, 3000);
-    }
+    signFormData({
+      e,
+      formData,
+      serviceFunction: userSignIn,
+      getUserInfo,
+      setIsValid,
+      navigate,
+      warning,
+      setWarning,
+      setIsVisible,
+    });
   }
 
   function handleToggleEye() {
