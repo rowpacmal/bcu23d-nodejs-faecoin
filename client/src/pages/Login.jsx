@@ -10,7 +10,7 @@ import style from '../styles/Form.module.css';
 
 function Login() {
   const navigate = useNavigate();
-  const { isValid, setIsValid } = useContext(AppContext);
+  const { isValid, setIsValid, getUserInfo } = useContext(AppContext);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -38,6 +38,7 @@ function Login() {
       const token = await userSignIn(formData);
       localStorage.setItem('TOKEN', token);
 
+      getUserInfo();
       setIsValid(true);
       navigate('/me');
     } catch (error) {

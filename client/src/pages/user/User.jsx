@@ -1,42 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { IconCoins, IconWallet } from '@tabler/icons-react';
-import UserContext from '../../contexts/UserContext';
-import Loading from '../../components/Loading';
 
-import { getUserAccount } from '../../services/userService';
-import { getWalletBalance } from '../../services/walletService';
+import AppContext from '../../contexts/AppContext';
+import Loading from '../../components/Loading';
 
 import generalStyle from '../../styles/general.module.css';
 import style from '../../styles/User.module.css';
 
 function User() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isMining, setIsMining] = useState(false);
-  const [user, setUser] = useState({});
-  const [wallet, setWallet] = useState({
-    address: '',
-    balance: 0,
-  });
-
-  async function getUserInfo() {
-    setIsLoading(true);
-
-    try {
-      const token = localStorage.getItem('TOKEN');
-
-      setUser(await getUserAccount(token));
-      setWallet(await getWalletBalance(token));
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    getUserInfo();
-  }, []);
+  const { isLoading, wallet } = useContext(AppContext);
 
   return (
     <>
@@ -99,17 +72,7 @@ function User() {
               </nav>
 
               <section className={style.section}>
-                <UserContext.Provider
-                  value={{
-                    isLoading,
-                    isMining,
-                    setIsMining,
-                    user,
-                    getUserInfo,
-                  }}
-                >
-                  <Outlet />
-                </UserContext.Provider>
+                <Outlet />
               </section>
             </div>
           )}

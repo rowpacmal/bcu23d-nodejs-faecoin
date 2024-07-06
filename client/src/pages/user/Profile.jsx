@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import { IconUserCircle } from '@tabler/icons-react';
-import UserContext from '../../contexts/UserContext';
+import AppContext from '../../contexts/AppContext';
 import updateFormData from '../../utils/updateFormData';
 
 import formStyle from '../../styles/Form.module.css';
 
 function Profile() {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AppContext);
   const [userData, setUserData] = useState({
     name: user?.name,
     email: user?.email,

@@ -10,7 +10,7 @@ import style from '../styles/Form.module.css';
 
 function Register() {
   const navigate = useNavigate();
-  const { isValid, setIsValid } = useContext(AppContext);
+  const { isValid, setIsValid, getUserInfo } = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,6 +39,7 @@ function Register() {
       const token = await userSignUp(formData);
       localStorage.setItem('TOKEN', token);
 
+      getUserInfo();
       setIsValid(true);
       navigate('/me');
     } catch (error) {

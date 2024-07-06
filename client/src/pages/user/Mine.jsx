@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { IconTimelineEventPlus } from '@tabler/icons-react';
-import UserContext from '../../contexts/UserContext';
+import AppContext from '../../contexts/AppContext';
 import { mineTransactions } from '../../services/transactionService';
 
 import style from '../../styles/Mine.module.css';
 import Loading from '../../components/Loading';
 
 function Mine() {
-  const { getUserInfo, isMining, setIsMining } = useContext(UserContext);
+  const { getUserInfo, isMining, setIsMining } = useContext(AppContext);
 
   async function handleMineBlock() {
     setIsMining(true);
