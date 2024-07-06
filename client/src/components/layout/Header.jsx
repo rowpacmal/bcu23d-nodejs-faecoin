@@ -39,12 +39,12 @@ function Header() {
             </li>
 
             {/* <div className={style.control}>
-              <Loading isSpinner={true} />
+              <Loading setSpinner={true} />
             </div> */}
 
             <div className={style.control}>
               {isLoading ? (
-                <Loading isSpinner={true} />
+                <Loading setSpinner={true} />
               ) : !isValid ? (
                 <li className={style.li}>
                   <NavLink to="/login">

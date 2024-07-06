@@ -1,10 +1,10 @@
 import style from '../styles/Loading.module.css';
 
-function Loading({ isSpinner }) {
+function Loading({ setSpinner }) {
   return (
     <div className={style.container}>
       <div className={style.wrapper}>
-        {isSpinner === true ? (
+        {setSpinner === true ? (
           <div className={style.spinner}></div>
         ) : (
           <>

@@ -58,7 +58,7 @@ function Mine() {
 
       <div className={style.buttons}>
         {isMining ? (
-          <Loading isSpinner={true} />
+          <Loading setSpinner={true} />
         ) : (
           <button onClick={handleMineBlock}>Mine block</button>
         )}
