@@ -13,7 +13,8 @@ import Profile from './pages/Profile';
 import Transaction from './pages/Transaction';
 import Send from './pages/exchange/Send';
 import Demo from './pages/Demo';
-import Stake from './pages/Stake';
+import Mine from './pages/Mine';
+import ExchangeIndex from './pages/ExchangeIndex';
 
 export const router = createBrowserRouter([
   {
@@ -53,7 +54,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <h3>Buy, sell, swap, send and receive FaeCoin!</h3>,
+                element: <ExchangeIndex />,
               },
               {
                 path: '/me/exchange/buy',
@@ -78,8 +79,8 @@ export const router = createBrowserRouter([
             ],
           },
           {
-            path: '/me/stake',
-            element: <Stake />,
+            path: '/me/mine',
+            element: <Mine />,
           },
         ],
       },
