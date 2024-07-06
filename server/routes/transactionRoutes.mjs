@@ -2,7 +2,6 @@ import express from 'express';
 import {
   addTransaction,
   getTransactionPool,
-  getWalletBalance,
   mineTransactions,
 } from '../controllers/transactionController.mjs';
 import {
