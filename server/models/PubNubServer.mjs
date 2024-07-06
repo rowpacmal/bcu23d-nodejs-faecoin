@@ -32,8 +32,7 @@ export default class PubNubServer {
           const parsedMessage = JSON.parse(message);
 
           console.log(
-            `Channel: ${channel}\nRaw message: ${message}\nParsed message:`,
-            parsedMessage
+            `Channel ${channel}, successfully parsed incoming message`
           );
 
           switch (channel) {
@@ -44,11 +43,6 @@ export default class PubNubServer {
               break;
 
             case this.channels.TRANSACTION:
-              // if (
-              //   !this.transactionPool.transactionExist(this.wallet.publicKey)
-              // ) {
-              //   this.transactionPool.addTransaction(parsedMessage);
-              // }
               const { id, inputMap, outputMap } = parsedMessage;
               const transaction = new Transaction({ id, inputMap, outputMap });
 
@@ -59,7 +53,7 @@ export default class PubNubServer {
               return;
           }
         } catch (error) {
-          console.error('Failed to parse message:', error.message);
+          console.error('Failed to parse incoming message:', error.message);
         }
       },
     });
@@ -85,6 +79,10 @@ export default class PubNubServer {
 
       if (Object.keys(this.channels).length > 0) {
         this.server.subscribe({ channels: Object.values(this.channels) });
+      } else {
+        console.warn(
+          'There are no active channels to subscribe to, errors may occur'
+        );
       }
     } catch (error) {
       console.error('Failed to initialize PubNub:', error.message);
@@ -96,7 +94,7 @@ export default class PubNubServer {
       const selectedChannel = this.channels[channel];
 
       if (!selectedChannel) {
-        throw new Error(`Channel ${channel} is not defined.`);
+        throw new Error(`Channel ${channel}, not found.`);
       }
 
       await this.server.publish({
@@ -105,7 +103,7 @@ export default class PubNubServer {
           typeof message === 'string' ? message : JSON.stringify(message),
       });
     } catch (error) {
-      console.error('Failed to publish message:', error.message);
+      console.error('Failed to publish incoming message:', error.message);
     }
   }
 
