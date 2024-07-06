@@ -8,7 +8,7 @@ import generalStyle from '../../styles/general.module.css';
 import formStyle from '../../styles/Form.module.css';
 import style from '../../styles/Transaction.module.css';
 
-function Send() {
+function ExchangeSend() {
   const [formData, setFormData] = useState({
     recipient: '',
     amount: '',
@@ -100,10 +100,6 @@ function Send() {
 
           <div className={formStyle.buttons}>
             <button type="submit">Send</button>
-
-            <button className={formStyle.button} type="button">
-              Clear
-            </button>
           </div>
         </div>
       </form>
@@ -121,4 +117,4 @@ function Send() {
   );
 }
 
-export default Send;
+export default ExchangeSend;

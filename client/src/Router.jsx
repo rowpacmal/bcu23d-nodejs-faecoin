@@ -3,18 +3,21 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Missing from './pages/Missing';
 
-import Explore from './pages/Explore';
 import Home from './pages/Home';
+import Explore from './pages/Explore';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import User from './pages/User';
-import Welcome from './pages/Welcome';
-import Profile from './pages/Profile';
-import Transaction from './pages/Transaction';
-import Send from './pages/exchange/Send';
-import Demo from './pages/Demo';
-import Mine from './pages/Mine';
-import ExchangeIndex from './pages/ExchangeIndex';
+
+import User from './pages/user/User';
+import Welcome from './pages/user/Welcome';
+import Profile from './pages/user/Profile';
+import Mine from './pages/user/Mine';
+
+import Exchange from './pages/exchange/Exchange';
+import ExchangeIndex from './pages/exchange/ExchangeIndex';
+import ExchangeSend from './pages/exchange/ExchangeSend';
+
+import Demo from './components/Demo';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +27,10 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
+        path: '/explore',
+        element: <Explore />,
+      },
+      {
         path: '/login',
         element: <Login />,
       },
@@ -31,11 +38,6 @@ export const router = createBrowserRouter([
         path: '/register',
         element: <Register />,
       },
-      {
-        path: '/explore',
-        element: <Explore />,
-      },
-
       {
         path: '/me',
         element: <User />,
@@ -50,7 +52,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/me/exchange',
-            element: <Transaction />,
+            element: <Exchange />,
             children: [
               {
                 index: true,
@@ -70,7 +72,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: '/me/exchange/send',
-                element: <Send />,
+                element: <ExchangeSend />,
               },
               {
                 path: '/me/exchange/receive',

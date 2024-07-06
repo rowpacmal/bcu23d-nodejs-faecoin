@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import UserContext from '../contexts/UserContext';
 import { IconSparkles } from '@tabler/icons-react';
+import UserContext from '../../contexts/UserContext';
 
 function Welcome() {
   const { user } = useContext(UserContext);

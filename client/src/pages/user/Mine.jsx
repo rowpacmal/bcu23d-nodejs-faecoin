@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { IconTimelineEventPlus } from '@tabler/icons-react';
-import UserContext from '../contexts/UserContext';
-import { mineTransactions } from '../services/transactionService';
+import UserContext from '../../contexts/UserContext';
+import { mineTransactions } from '../../services/transactionService';
 
-import style from '../styles/Mine.module.css';
-import Loading from '../components/Loading';
+import style from '../../styles/Mine.module.css';
+import Loading from '../../components/Loading';
 
 function Mine() {
   const { getUserInfo, isMining, setIsMining } = useContext(UserContext);

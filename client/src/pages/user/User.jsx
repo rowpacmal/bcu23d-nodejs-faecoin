@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { IconCoins, IconWallet } from '@tabler/icons-react';
-import UserContext from '../contexts/UserContext';
-import Loading from '../components/Loading';
+import UserContext from '../../contexts/UserContext';
+import Loading from '../../components/Loading';
 
-import { getUserAccount } from '../services/userService';
-import { getWalletBalance } from '../services/walletService';
+import { getUserAccount } from '../../services/userService';
+import { getWalletBalance } from '../../services/walletService';
 
-import generalStyle from '../styles/general.module.css';
-import style from '../styles/User.module.css';
+import generalStyle from '../../styles/general.module.css';
+import style from '../../styles/User.module.css';
 
 function User() {
   const [isLoading, setIsLoading] = useState(true);

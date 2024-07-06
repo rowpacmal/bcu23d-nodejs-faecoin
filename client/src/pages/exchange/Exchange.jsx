@@ -1,9 +1,4 @@
-import { useState } from 'react';
-import updateFormData from '../utils/updateFormData';
-import { addTransaction } from '../services/transactionService';
-
-import formStyle from '../styles/Form.module.css';
-import style from '../styles/Transaction.module.css';
+import { NavLink, Outlet } from 'react-router-dom';
 import {
   IconArrowDown,
   IconArrowUpRight,
@@ -12,50 +7,10 @@ import {
   IconRefresh,
   IconReplace,
 } from '@tabler/icons-react';
-import { NavLink, Outlet } from 'react-router-dom';
 
-function Transaction() {
-  const [formData, setFormData] = useState({
-    recipient: '',
-    amount: '',
-  });
-  const [warning, setWarning] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
+import style from '../../styles/Transaction.module.css';
 
-  function handleChange(e) {
-    updateFormData(e, formData, setFormData);
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    try {
-      const token = localStorage.getItem('TOKEN');
-      const data = {
-        recipient: formData.recipient,
-        amount: +formData.amount,
-      };
-
-      await addTransaction(token, data);
-
-      setFormData({
-        recipient: '',
-        amount: '',
-      });
-    } catch (error) {
-      if (warning) return;
-
-      setWarning(error.message);
-      setIsVisible(true);
-
-      setTimeout(() => {
-        setIsVisible(false);
-
-        setTimeout(() => setWarning(null), 1000);
-      }, 3000);
-    }
-  }
-
+function Exchange() {
   return (
     <>
       <h2>
@@ -129,4 +84,4 @@ function Transaction() {
   );
 }
 
-export default Transaction;
+export default Exchange;
