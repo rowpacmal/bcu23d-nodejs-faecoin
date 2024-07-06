@@ -27,7 +27,6 @@ export const security = (app) => {
     limit: 1000,
   });
 
-  // app.use(helmet({ contentSecurityPolicy: false }));
   app.use(helmet());
   app.use(xss());
   app.use(limit);
