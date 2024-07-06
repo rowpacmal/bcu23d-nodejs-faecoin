@@ -30,12 +30,16 @@ export const protectedAccess = asyncHandler(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
 
-  if (!token) next(errorRes);
+  if (!token) {
+    next(errorRes);
+  }
 
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
   req.user = await User.findById(decodedToken.id);
 
-  if (!req.user) next(errorRes);
+  if (!req.user) {
+    next(errorRes);
+  }
 
   next();
 });
