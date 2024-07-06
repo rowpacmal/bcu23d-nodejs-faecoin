@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { userSignIn } from '../services/userService';
 import { IconEye, IconEyeClosed } from '@tabler/icons-react';
 import updateFormData from '../utils/updateFormData';
-import GlobalContext from '../contexts/GlobalContext';
+import AppContext from '../contexts/AppContext';
 
 import generalStyle from '../styles/general.module.css';
 import style from '../styles/Form.module.css';
 
 function Login() {
   const navigate = useNavigate();
-  const { isValid, setIsValid } = useContext(GlobalContext);
+  const { isValid, setIsValid } = useContext(AppContext);
   const [formData, setFormData] = useState({
     email: '',
     password: '',

@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import GlobalContext from '../../contexts/GlobalContext';
+import AppContext from '../../contexts/AppContext';
 
 import generalStyle from '../../styles/general.module.css';
 import style from '../../styles/Hero.module.css';
 
 function Hero() {
-  const { isValid } = useContext(GlobalContext);
+  const { isValid } = useContext(AppContext);
 
   return (
     <div className={`${generalStyle.container} ${style.wrapper}`}>

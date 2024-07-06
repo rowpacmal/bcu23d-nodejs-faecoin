@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { IconLogout, IconUserCircle } from '@tabler/icons-react';
-import GlobalContext from '../../contexts/GlobalContext';
+import AppContext from '../../contexts/AppContext';
 import Loading from '../Loading';
 
 import generalStyle from '../../styles/general.module.css';
 import style from '../../styles/Header.module.css';
 
 function Header() {
-  const { isLoading, isValid, setIsValid } = useContext(GlobalContext);
+  const { isLoading, isValid, setIsValid } = useContext(AppContext);
 
   function handleSignOut() {
     localStorage.removeItem('TOKEN');

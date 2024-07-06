@@ -1,6 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
 import { router } from './Router';
-import GlobalContext from './contexts/GlobalContext';
+import AppContext from './contexts/AppContext';
 import { useEffect, useState } from 'react';
 import { validateToken } from './services/userService';
 
@@ -28,9 +28,9 @@ function App() {
 
   return (
     <>
-      <GlobalContext.Provider value={{ isLoading, isValid, setIsValid }}>
+      <AppContext.Provider value={{ isLoading, isValid, setIsValid }}>
         <RouterProvider router={router} />
-      </GlobalContext.Provider>
+      </AppContext.Provider>
     </>
   );
 }
