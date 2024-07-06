@@ -5,7 +5,7 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const regex = /overview|exchange|stake/i;
+    const regex = /overview|exchange|mine/i;
 
     if (regex.test(pathname)) return;
 

@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { IconCoins, IconWallet } from '@tabler/icons-react';
 import UserContext from '../contexts/UserContext';
+import Loading from '../components/Loading';
 
 import { getUserAccount } from '../services/userService';
-import { mineTransactions } from '../services/transactionService';
 import { getWalletBalance } from '../services/walletService';
 
 import generalStyle from '../styles/general.module.css';
 import style from '../styles/User.module.css';
-import Loading from '../components/Loading';
 
 function User() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isMining, setIsMining] = useState(false);
   const [user, setUser] = useState({});
   const [wallet, setWallet] = useState({
     address: '',
@@ -37,14 +37,6 @@ function User() {
   useEffect(() => {
     getUserInfo();
   }, []);
-
-  async function handleMineBlock() {
-    const token = localStorage.getItem('TOKEN');
-
-    await mineTransactions(token);
-
-    getUserInfo();
-  }
 
   return (
     <>
@@ -99,15 +91,23 @@ function User() {
                   </li>
 
                   <li>
-                    <NavLink to="/me/stake">
-                      <span className="account">Stake</span>
+                    <NavLink to="/me/mine">
+                      <span className="account">Mine</span>
                     </NavLink>
                   </li>
                 </ul>
               </nav>
 
               <section className={style.section}>
-                <UserContext.Provider value={{ isLoading, user }}>
+                <UserContext.Provider
+                  value={{
+                    isLoading,
+                    isMining,
+                    setIsMining,
+                    user,
+                    getUserInfo,
+                  }}
+                >
                   <Outlet />
                 </UserContext.Provider>
               </section>
