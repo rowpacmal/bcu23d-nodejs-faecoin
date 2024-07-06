@@ -36,7 +36,9 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) next();
+  if (!this.isModified('password')) {
+    next();
+  }
 
   this.password = await bcrypt.hash(this.password, 12);
 });

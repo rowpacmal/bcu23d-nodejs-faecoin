@@ -17,7 +17,9 @@ export default class Wallet {
       });
     }
 
-    if (amount > this.balance) throw new ErrorResponse('Not enough funds', 400);
+    if (amount > this.balance) {
+      throw new ErrorResponse('Not enough funds', 400);
+    }
 
     return new Transaction({ sender: this, recipient, amount });
   }
@@ -34,15 +36,20 @@ export default class Wallet {
       const block = chain[i];
 
       for (let transaction of block.data) {
-        if (transaction.inputMap.address === address)
+        if (transaction.inputMap.address === address) {
           hasAddedTransaction = true;
+        }
 
         const value = transaction.outputMap[address];
 
-        if (value) total += value;
+        if (value) {
+          total += value;
+        }
       }
 
-      if (hasAddedTransaction) break;
+      if (hasAddedTransaction) {
+        break;
+      }
     }
 
     return hasAddedTransaction ? total : +process.env.DEFAULT_BALANCE + total;

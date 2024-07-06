@@ -20,7 +20,9 @@ export default class FileHandler {
 
   async read() {
     try {
-      if (!existsSync(this.path) || statSync(this.path).size === 0) return [];
+      if (!existsSync(this.path) || statSync(this.path).size === 0) {
+        return [];
+      }
 
       return JSON.parse(await readFile(this.path, { encoding: 'utf-8' }));
     } catch (error) {

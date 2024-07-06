@@ -35,8 +35,9 @@ export default class Transaction {
   }
 
   update({ sender, recipient, amount }) {
-    if (amount > this.outputMap[sender.publicKey])
+    if (amount > this.outputMap[sender.publicKey]) {
       throw new ErrorResponse('Not enough funds', 400);
+    }
 
     if (!this.outputMap[recipient]) {
       this.outputMap[recipient] = amount;
@@ -59,9 +60,13 @@ export default class Transaction {
       (total, amount) => total + amount
     );
 
-    if (amount !== outputTotal) return false;
-    if (!verifySignature({ publicKey: address, data: outputMap, signature }))
+    if (amount !== outputTotal) {
       return false;
+    }
+
+    if (!verifySignature({ publicKey: address, data: outputMap, signature })) {
+      return false;
+    }
 
     return true;
   }

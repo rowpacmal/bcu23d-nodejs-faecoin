@@ -17,7 +17,10 @@ const errorHandler = (err, req, res, next) => {
     const validation = Object.values(err.errors)
       .map((value) => value.message)
       .join(', ');
-    error = new ErrorResponse(`Invalid request, ${validation}`, 400);
+    error = new ErrorResponse(
+      `Requested fields are missing, ${validation}`,
+      400
+    );
   }
 
   const statusCode = error.statusCode || 500;

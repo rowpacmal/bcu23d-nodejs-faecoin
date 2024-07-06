@@ -16,13 +16,21 @@ export default class Blockchain {
   }
 
   updateChain(chain, shouldValidate, callback) {
-    if (chain.length <= this.chain.length) return;
+    if (chain.length <= this.chain.length) {
+      return;
+    }
 
-    if (!this.constructor.validateChain(chain)) return;
+    if (!this.constructor.validateChain(chain)) {
+      return;
+    }
 
-    if (shouldValidate && !this.validateTransactionData(chain)) return;
+    if (shouldValidate && !this.validateTransactionData(chain)) {
+      return;
+    }
 
-    if (callback) callback();
+    if (callback) {
+      callback();
+    }
 
     this.chain = chain;
   }
@@ -39,13 +47,16 @@ export default class Blockchain {
         ) {
           counter++;
 
-          if (counter > 1) return false;
+          if (counter > 1) {
+            return false;
+          }
 
           if (
             Object.values(transaction.outputMap)[0] !==
             +process.env.DEFAULT_MINING_REWARD
-          )
+          ) {
             return false;
+          }
         } else {
           if (!Transaction.validate(transaction)) {
             return false;
@@ -64,8 +75,9 @@ export default class Blockchain {
   }
 
   static validateChain(chain) {
-    if (JSON.stringify(chain.at(0)) !== JSON.stringify(Block.genesis))
+    if (JSON.stringify(chain.at(0)) !== JSON.stringify(Block.genesis)) {
       return false;
+    }
 
     for (let i = 1; i < chain.length; i++) {
       const { index, timestamp, prevHash, hash, data, nonce, difficulty } =
@@ -80,9 +92,17 @@ export default class Blockchain {
         difficulty
       );
 
-      if (hash !== validHash) return false;
-      if (prevHash !== lastHash) return false;
-      if (Math.abs(lastDifficulty - difficulty) > 1) return false;
+      if (hash !== validHash) {
+        return false;
+      }
+
+      if (prevHash !== lastHash) {
+        return false;
+      }
+
+      if (Math.abs(lastDifficulty - difficulty) > 1) {
+        return false;
+      }
     }
 
     return true;
