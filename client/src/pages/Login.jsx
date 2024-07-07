@@ -7,7 +7,6 @@ import { userSignIn } from '../services/userService';
 import { signFormData, updateFormData } from '../utils/formDataHandler';
 
 import generalStyle from '../styles/App.module.css';
-import style from '../styles/Form.module.css';
 
 const formLayout = [
   {
@@ -30,14 +29,14 @@ const formButtons = (
     <button type="submit">Sign In</button>
 
     <Link to="/register">
-      <button type="button" className={style.button}>
+      <button type="button" className={generalStyle.altButton}>
         Sign Up
       </button>
     </Link>
   </>
 );
 const formMessage = (
-  <p className={style.text}>
+  <p className={generalStyle.text}>
     Forgot your password? <Link>Reset it by clicking here</Link>.
   </p>
 );
@@ -80,7 +79,9 @@ function Login() {
   }
 
   return (
-    <section className={`${generalStyle.container} ${style.section}`}>
+    <section
+      className={`${generalStyle.container} ${generalStyle.box} ${generalStyle.section}`}
+    >
       <h2>Sign In</h2>
 
       <Form

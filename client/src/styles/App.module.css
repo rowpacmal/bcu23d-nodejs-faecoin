@@ -11,6 +11,19 @@
   padding: 2rem;
 }
 
+.section {
+  max-width: 512px;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 1rem;
+  padding: 2rem 4rem;
+
+  h2 {
+    line-height: normal;
+  }
+}
+
 .alert {
   height: min-content;
   background-color: var(--light-primary-color);
@@ -26,6 +39,10 @@
   color: var(--primary-color);
 }
 
+.altButton {
+  background-color: var(--accent-color);
+}
+
 .copyButton {
   background-color: var(--secondary-text-color);
   border-radius: 0.3rem;
@@ -33,4 +50,10 @@
   place-items: center;
   padding: 0.2rem;
   margin-left: 0.3rem;
+}
+
+.text {
+  color: var(--secondary-text-color);
+  font-size: 0.8rem;
+  text-align: center;
 }

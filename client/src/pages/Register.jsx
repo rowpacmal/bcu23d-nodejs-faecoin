@@ -7,7 +7,6 @@ import { userSignUp } from '../services/userService';
 import { signFormData, updateFormData } from '../utils/formDataHandler';
 
 import generalStyle from '../styles/App.module.css';
-import style from '../styles/Form.module.css';
 
 const formLayout = [
   {
@@ -38,19 +37,19 @@ const formButtons = (
       <button type="button">Back</button>
     </Link>
 
-    <button type="submit" className={style.button}>
+    <button type="submit" className={generalStyle.altButton}>
       Create
     </button>
   </>
 );
 const formMessage = (
   <>
-    <p className={style.text}>
+    <p className={generalStyle.text}>
       <input type="checkbox" name="terms" required /> By signing up, you agree
       to our <Link>Terms of Use</Link>.
     </p>
 
-    <p className={style.text}>
+    <p className={generalStyle.text}>
       <input type="checkbox" name="newsletter" /> Get the latest updates and
       exclusive offers directly in your inbox. Don&apos;t miss out!
     </p>
@@ -96,7 +95,9 @@ function Register() {
   }
 
   return (
-    <section className={`${generalStyle.container} ${style.section}`}>
+    <section
+      className={`${generalStyle.container} ${generalStyle.box} ${generalStyle.section}`}
+    >
       <h2>Sign Up</h2>
 
       <Form
