@@ -5,7 +5,7 @@ import AppContext from '../../contexts/AppContext';
 import Loading from '../Loading';
 
 import generalStyle from '../../styles/App.module.css';
-import style from '../../styles/Header.module.css';
+import style from './Header.module.css';
 
 function Header() {
   const { isLoading, isValid, setIsValid } = useContext(AppContext);
@@ -19,8 +19,9 @@ function Header() {
   return (
     <header className={style.header}>
       <div className={`${generalStyle.container} ${style.container}`}>
-        <Link to="/" className={style.link}>
+        <Link to="/" className={style.logo}>
           <img src="./src/assets/Logo.svg" alt="" width="100" height="100" />
+
           <span>Fae</span>
         </Link>
 

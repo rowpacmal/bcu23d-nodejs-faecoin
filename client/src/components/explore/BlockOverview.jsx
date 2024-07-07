@@ -1,4 +1,4 @@
-import style from '../../styles/BlockOverview.module.css';
+import style from './BlockOverview.module.css';
 import CopyButton from '../CopyButton';
 
 function BlockOverview({ activeBlock }) {

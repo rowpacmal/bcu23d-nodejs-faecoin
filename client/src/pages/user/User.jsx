@@ -6,7 +6,7 @@ import AppContext from '../../contexts/AppContext';
 import Loading from '../../components/Loading';
 
 import generalStyle from '../../styles/App.module.css';
-import style from '../../styles/User.module.css';
+import style from './User.module.css';
 import CopyButton from '../../components/CopyButton';
 
 function User() {

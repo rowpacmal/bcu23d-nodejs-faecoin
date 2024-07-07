@@ -14,11 +14,10 @@
   gap: 3rem;
 }
 
-.link {
+.logo {
   display: flex;
   place-items: center;
   gap: 1rem;
-  color: var(--primary-text-color);
 
   img {
     width: 60px;
@@ -31,7 +30,8 @@
     font-weight: bold;
   }
 }
-.link:hover {
+.logo,
+.logo:hover {
   color: var(--primary-text-color);
 }
 

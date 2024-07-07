@@ -3,7 +3,7 @@ import { IconTimelineEventPlus } from '@tabler/icons-react';
 import AppContext from '../../contexts/AppContext';
 import { mineTransactions } from '../../services/transactionService';
 
-import style from '../../styles/Mine.module.css';
+import style from './Mine.module.css';
 import Loading from '../../components/Loading';
 
 function Mine() {

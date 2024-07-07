@@ -8,13 +8,8 @@ function Footer() {
     <footer className={style.footer}>
       <div className={`${generalStyle.container} ${style.container}`}>
         <Link className={style.logo}>
-          <img
-            src="./src/assets/Logo.svg"
-            alt=""
-            width="100"
-            height="100"
-            className={style.img}
-          />
+          <img src="./src/assets/Logo.svg" alt="" width="100" height="100" />
+
           <span>Fae</span>
         </Link>
 

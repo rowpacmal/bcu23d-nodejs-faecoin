@@ -2,7 +2,7 @@ import ScrollToTop from '../components/ScrollToTop';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 
-import style from '../styles/Main.module.css';
+import style from './Layout.module.css';
 
 function Missing() {
   return (

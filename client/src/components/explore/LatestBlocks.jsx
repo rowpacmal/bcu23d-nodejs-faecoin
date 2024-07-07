@@ -1,6 +1,6 @@
 import { IconBox } from '@tabler/icons-react';
 
-import style from '../../styles/LatestBlocks.module.css';
+import style from './LatestBlocks.module.css';
 
 function LatestBlocks({ blockchain, setActiveBlock }) {
   return (
