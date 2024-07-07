@@ -7,6 +7,7 @@ import Loading from '../../components/Loading';
 
 import generalStyle from '../../styles/general.module.css';
 import style from '../../styles/User.module.css';
+import CopyButton from '../../components/CopyButton';
 
 function User() {
   const { isLoading, wallet } = useContext(AppContext);
@@ -25,15 +26,28 @@ function User() {
 
               <div className={style.address}>
                 <span className={style.label}>Wallet address</span>
+
                 <span className={`${style.span} ${style.big}`}>
-                  <div className={style.addressWrapper}>{wallet?.address}</div>
+                  <div>
+                    {wallet?.address?.length > 1
+                      ? `${wallet?.address?.slice(
+                          0,
+                          4
+                        )}-${wallet?.address?.slice(-4)}`
+                      : wallet?.address}
+                  </div>
+
+                  <div>
+                    <CopyButton copyToClipboard={wallet?.address} />
+                  </div>
                 </span>
               </div>
 
               <div className={style.balance}>
                 <span className={style.label}>Balance</span>
+
                 <span className={`${style.span} ${style.big}`}>
-                  {wallet?.balance?.toFixed(2)}
+                  <div>{wallet?.balance?.toFixed(2)}</div>
                 </span>
               </div>
 

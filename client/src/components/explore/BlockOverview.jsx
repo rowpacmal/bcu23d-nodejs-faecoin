@@ -1,4 +1,5 @@
 import style from '../../styles/BlockOverview.module.css';
+import CopyButton from '../CopyButton';
 
 function BlockOverview({ activeBlock }) {
   return (
@@ -58,6 +59,7 @@ function BlockOverview({ activeBlock }) {
                     )}`
                   : activeBlock?.hash}
               </span>
+              <CopyButton copyToClipboard={activeBlock?.hash} />
             </li>
 
             <li>
@@ -71,6 +73,7 @@ function BlockOverview({ activeBlock }) {
                     )}-${activeBlock?.prevHash?.slice(-4)}`
                   : activeBlock?.prevHash}
               </span>
+              <CopyButton copyToClipboard={activeBlock?.prevHash} />
             </li>
 
             <li>

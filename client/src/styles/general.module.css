@@ -18,3 +18,12 @@
   text-transform: uppercase;
   color: var(--primary-color);
 }
+
+.copyButton {
+  background-color: var(--secondary-text-color);
+  border-radius: 0.3rem;
+  display: flex;
+  place-items: center;
+  padding: 0.2rem;
+  margin-left: 0.3rem;
+}
