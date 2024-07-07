@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IconArrowUpRight } from '@tabler/icons-react';
 
-import updateFormData from '../../utils/updateFormData';
+import { updateFormData } from '../../utils/formDataHandler';
 import { addTransaction } from '../../services/transactionService';
 
 import generalStyle from '../../styles/general.module.css';

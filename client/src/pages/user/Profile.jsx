@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { IconUserCircle } from '@tabler/icons-react';
 import AppContext from '../../contexts/AppContext';
-import updateFormData from '../../utils/updateFormData';
+import { updateFormData } from '../../utils/formDataHandler';
 
 import formStyle from '../../styles/Form.module.css';
 
