@@ -1,30 +1,30 @@
-.wrapper {
+.container {
   display: flex;
   place-items: center;
   gap: 5rem;
   padding: 0 3rem;
-
-  img {
-    width: auto;
-    max-height: 350px;
-  }
 }
 
 .section {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
 
-  h1 {
-    font-size: 3rem;
-    line-height: normal;
-  }
+.h1 {
+  font-size: 3rem;
+  line-height: normal;
+}
 
-  p {
-    color: var(--secondary-text-color);
-  }
+.p {
+  color: var(--secondary-text-color);
 }
 
 .button {
   background-color: var(--accent-color);
+}
+
+.img {
+  width: auto;
+  max-height: 350px;
 }

@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import AppContext from '../../contexts/AppContext';
 
 import generalStyle from '../../styles/App.module.css';
-import style from '../../styles/Hero.module.css';
+import style from './Hero.module.css';
 
 function Hero() {
   const { isValid } = useContext(AppContext);
 
   return (
-    <div className={`${generalStyle.container} ${style.wrapper}`}>
+    <div className={`${generalStyle.container} ${style.container}`}>
       <section className={style.section}>
-        <h1>Unlock the Future of Finance with FaeCoin</h1>
+        <h1 className={style.h1}>Unlock the Future of Finance with FaeCoin</h1>
 
-        <p>
+        <p className={style.p}>
           Welcome! Join us on a journey to revolutionize digital finance.
           Empower your transactions with FaeCoin: Your Gateway to Decentralized
           Finance.
@@ -32,6 +32,7 @@ function Hero() {
           alt="Hero splash art"
           width="627"
           height="518"
+          className={style.img}
         />
       </figure>
     </div>
