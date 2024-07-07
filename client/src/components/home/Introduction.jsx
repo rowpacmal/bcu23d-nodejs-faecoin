@@ -1,5 +1,5 @@
 import generalStyle from '../../styles/App.module.css';
-import style from '../../styles/Introduction.module.css';
+import style from './Introduction.module.css';
 
 function Introduction() {
   return (
@@ -11,13 +11,14 @@ function Introduction() {
             alt="Lady holding shopping bags"
             width="504"
             height="475"
+            className={style.img}
           />
         </figure>
 
-        <section>
-          <h2>Buy, store, send, and swap with FaeCoin</h2>
+        <section className={style.section}>
+          <h2 className={style.h2}>Buy, store, send, and swap with FaeCoin</h2>
 
-          <p>
+          <p className={style.p}>
             Available on desktop, tablet and mobile devices, FaeCoin provides an
             encrypted platform, protected login, secure exchanges and
             transfers—everything you need to explore your digital finance.
@@ -26,10 +27,10 @@ function Introduction() {
       </div>
 
       <div className={style.info}>
-        <section>
-          <h2>Explore the blockchain</h2>
+        <section className={style.section}>
+          <h2 className={style.h2}>Explore the blockchain</h2>
 
-          <p>
+          <p className={style.p}>
             FaeCoin offers the simplest yet most secure way to connect with the
             blockchain and web3. Stay in control while interacting on the new
             decentralized web.
@@ -42,6 +43,7 @@ function Introduction() {
             alt="Lady holding shopping bags"
             width="567"
             height="475"
+            className={style.img}
           />
         </figure>
       </div>

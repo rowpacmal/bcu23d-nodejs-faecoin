@@ -1,12 +1,12 @@
 import generalStyle from '../../styles/App.module.css';
-import style from '../../styles/Newsletter.module.css';
+import style from './Newsletter.module.css';
 
 function Newsletter() {
   return (
-    <div className={style.wrapper}>
+    <div className={style.container}>
       <section className={`${generalStyle.container} ${style.section}`}>
         <div>
-          <h2>Receive our newsletter</h2>
+          <h2 className={style.h2}>Receive our newsletter</h2>
 
           <p className={style.message}>
             Sign up for our newsletter to learn more about FaeCoin and the

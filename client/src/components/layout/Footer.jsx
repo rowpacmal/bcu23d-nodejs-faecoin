@@ -1,22 +1,28 @@
 import { Link } from 'react-router-dom';
 
 import generalStyle from '../../styles/App.module.css';
-import style from '../../styles/Footer.module.css';
+import style from './Footer.module.css';
 
 function Footer() {
   return (
     <footer className={style.footer}>
-      <div className={`${generalStyle.container} ${style.wrapper}`}>
-        <Link className={style.link}>
-          <img src="./src/assets/Logo.svg" alt="" width="100" height="100" />
+      <div className={`${generalStyle.container} ${style.container}`}>
+        <Link className={style.logo}>
+          <img
+            src="./src/assets/Logo.svg"
+            alt=""
+            width="100"
+            height="100"
+            className={style.img}
+          />
           <span>Fae</span>
         </Link>
 
         <div className={style.links}>
           <section className={style.section}>
-            <h3>Learn More</h3>
+            <h3 className={style.h3}>Learn More</h3>
 
-            <ul>
+            <ul className={style.ul}>
               <li>
                 <Link>About</Link>
               </li>
@@ -44,9 +50,9 @@ function Footer() {
           </section>
 
           <section className={style.section}>
-            <h3>Get Involved</h3>
+            <h3 className={style.h3}>Get Involved</h3>
 
-            <ul>
+            <ul className={style.ul}>
               <li>
                 <Link>GitHub</Link>
               </li>
@@ -70,9 +76,9 @@ function Footer() {
           </section>
 
           <section className={style.section}>
-            <h3>Legal</h3>
+            <h3 className={style.h3}>Legal</h3>
 
-            <ul>
+            <ul className={style.ul}>
               <li>
                 <Link>Privacy Policy</Link>
               </li>
@@ -92,7 +98,7 @@ function Footer() {
           </section>
         </div>
 
-        <p>&copy;2024 FaeCoin • A Magical World</p>
+        <p className={style.copy}>&copy;2024 FaeCoin • A Magical World</p>
       </div>
     </footer>
   );
