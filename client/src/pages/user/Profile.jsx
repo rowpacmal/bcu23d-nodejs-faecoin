@@ -6,8 +6,6 @@ import Form from '../../components/form/Form';
 
 const formLayout = [
   {
-    select: false,
-    options: [],
     label: 'Name',
     name: 'name',
     type: 'text',
@@ -15,8 +13,6 @@ const formLayout = [
     required: true,
   },
   {
-    select: false,
-    options: [],
     label: 'Email',
     name: 'email',
     type: 'email',
@@ -37,8 +33,6 @@ const formLayout = [
     ],
     label: 'Role',
     name: 'role',
-    type: '',
-    placeholder: '',
     required: true,
   },
 ];

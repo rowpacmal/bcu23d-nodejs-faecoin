@@ -4,9 +4,12 @@ import FormInput from './FormInput';
 function Form({
   formLayout,
   formButtons,
+  formMessage,
   formData,
   handleChange,
   handleSubmit,
+  isVisible,
+  warning,
 }) {
   return (
     <form onSubmit={handleSubmit} className={style.form}>
@@ -22,7 +25,13 @@ function Form({
       </div>
 
       <div className={style.control}>
+        <p className={`${style.warning}${isVisible ? ` ${style.show}` : ''}`}>
+          {warning}
+        </p>
+
         <div className={style.buttons}>{formButtons}</div>
+
+        {formMessage}
       </div>
     </form>
   );
