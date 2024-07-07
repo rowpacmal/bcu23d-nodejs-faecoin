@@ -1,23 +1,41 @@
 import { useState } from 'react';
 import { IconArrowUpRight } from '@tabler/icons-react';
+import Form from '../../components/form/Form';
 
 import { updateFormData } from '../../utils/formDataHandler';
 import { addTransaction } from '../../services/transactionService';
 
 import generalStyle from '../../styles/App.module.css';
-import formStyle from '../../styles/Form.module.css';
 import style from '../../styles/Transaction.module.css';
 
+const formLayout = [
+  {
+    label: 'Recipient',
+    name: 'recipient',
+    type: 'text',
+    placeholder: 'Enter wallet address',
+    required: true,
+  },
+  {
+    label: 'Amount',
+    name: 'amount',
+    type: 'number',
+    placeholder: '0.00 Fae',
+    required: true,
+  },
+];
+const formButtons = <button type="submit">Send</button>;
+
 function ExchangeSend() {
+  const [warning, setWarning] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     recipient: '',
     amount: '',
   });
-  const [warning, setWarning] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   function handleChange(e) {
-    updateFormData(e, formData, setFormData);
+    updateFormData({ e, formData, setFormData });
   }
 
   async function handleSubmit(e) {
@@ -56,53 +74,15 @@ function ExchangeSend() {
         <IconArrowUpRight /> Send Transaction
       </h3>
 
-      <form className={style.form} onSubmit={handleSubmit}>
-        <div className={formStyle.fields}>
-          <div className={formStyle.input}>
-            <label htmlFor="recipient">Recipient</label>
-
-            <input
-              id="recipient"
-              name="recipient"
-              type="text"
-              placeholder="Enter wallet address"
-              value={formData.recipient}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className={formStyle.input}>
-            <label htmlFor="amount">Amount</label>
-
-            <input
-              id="amount"
-              name="amount"
-              type="number"
-              placeholder="0.00 Fae"
-              min="0"
-              step="any"
-              value={formData.amount}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-
-        <div className={style.control}>
-          <p
-            className={`${formStyle.warning}${
-              isVisible ? ` ${formStyle.show}` : ''
-            }`}
-          >
-            {warning}
-          </p>
-
-          <div className={formStyle.buttons}>
-            <button type="submit">Send</button>
-          </div>
-        </div>
-      </form>
+      <Form
+        formLayout={formLayout}
+        formButtons={formButtons}
+        formData={formData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        isVisible={isVisible}
+        warning={warning}
+      />
 
       <p className={`${generalStyle.alert} ${style.tip}`}>
         <span className={generalStyle.embolden}>Tip</span> To add a transaction

@@ -1,4 +1,4 @@
-import style from '../../styles/Form.module.css';
+import style from './Form.module.css';
 import FormInput from './FormInput';
 
 function Form({

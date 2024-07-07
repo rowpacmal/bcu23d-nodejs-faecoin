@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { IconEye, IconEyeClosed } from '@tabler/icons-react';
 
-import style from '../../styles/Form.module.css';
+import style from './Form.module.css';
 
 function FormInput({ input, formData, handleChange }) {
   const isTypePassword = input?.type === 'password';
+  const isTypeNumber = input?.type === 'number';
   const [toggleEye, setToggleEye] = useState(false);
 
   function handleToggleEye() {
@@ -43,6 +44,8 @@ function FormInput({ input, formData, handleChange }) {
             isTypePassword ? (!toggleEye ? 'password' : 'text') : input?.type
           }
           placeholder={input?.placeholder}
+          min={isTypeNumber && '0'}
+          step={isTypeNumber && 'any'}
           value={formData?.[input?.name]}
           onChange={handleChange}
           required={input?.required}
