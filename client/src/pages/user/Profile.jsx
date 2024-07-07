@@ -2,23 +2,64 @@ import { useContext, useState } from 'react';
 import { IconUserCircle } from '@tabler/icons-react';
 import AppContext from '../../contexts/AppContext';
 import { updateFormData } from '../../utils/formDataHandler';
+import Form from '../../components/form/Form';
 
-import formStyle from '../../styles/Form.module.css';
+const formLayout = [
+  {
+    select: false,
+    options: [],
+    label: 'Name',
+    name: 'name',
+    type: 'text',
+    placeholder: 'Enter full name',
+    required: true,
+  },
+  {
+    select: false,
+    options: [],
+    label: 'Email',
+    name: 'email',
+    type: 'email',
+    placeholder: 'Enter email address',
+    required: true,
+  },
+  {
+    select: true,
+    options: [
+      {
+        label: 'User',
+        value: 'user',
+      },
+      {
+        label: 'Manager',
+        value: 'manager',
+      },
+    ],
+    label: 'Role',
+    name: 'role',
+    type: '',
+    placeholder: '',
+    required: true,
+  },
+];
+const formButtons = <button type="submit">Update profile</button>;
 
 function Profile() {
   const { user } = useContext(AppContext);
-  const [userData, setUserData] = useState({
+  const [formData, setFormData] = useState({
     name: user?.name,
     email: user?.email,
     role: user?.role,
   });
 
   function handleChange(e) {
-    updateFormData(e, userData, setUserData);
+    updateFormData({ e, formData, setFormData });
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    alert('OK');
   }
 
   return (
@@ -31,59 +72,13 @@ function Profile() {
       <section>
         <h3>Account Details</h3>
 
-        <form onSubmit={handleSubmit} className={formStyle.form}>
-          <div className={formStyle.fields}>
-            <div className={formStyle.input}>
-              <label htmlFor="name">Name</label>
-
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Enter full name"
-                value={userData?.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className={formStyle.input}>
-              <label htmlFor="email">Email</label>
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter email address"
-                value={userData?.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className={formStyle.input}>
-              <label htmlFor="role">Role</label>
-
-              <select
-                id="role"
-                name="role"
-                value={userData?.role}
-                onChange={handleChange}
-                required
-              >
-                <option value="user">User</option>
-
-                <option value="manager">Manager</option>
-              </select>
-            </div>
-          </div>
-
-          <div className={formStyle.control}>
-            <div className={formStyle.buttons}>
-              <button type="submit">Update profile</button>
-            </div>
-          </div>
-        </form>
+        <Form
+          formLayout={formLayout}
+          formButtons={formButtons}
+          formData={formData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
       </section>
     </>
   );
