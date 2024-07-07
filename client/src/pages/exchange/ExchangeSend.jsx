@@ -4,7 +4,7 @@ import { IconArrowUpRight } from '@tabler/icons-react';
 import { updateFormData } from '../../utils/formDataHandler';
 import { addTransaction } from '../../services/transactionService';
 
-import generalStyle from '../../styles/general.module.css';
+import generalStyle from '../../styles/App.module.css';
 import formStyle from '../../styles/Form.module.css';
 import style from '../../styles/Transaction.module.css';
 

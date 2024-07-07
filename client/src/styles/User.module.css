@@ -20,19 +20,12 @@
 }
 
 .box {
-  border: 1px solid var(--border-color);
-  border-radius: 0.8rem;
-  padding: 2rem;
-  box-shadow: 4px 4px 4px var(--box-shadow);
   min-height: 600px;
 }
 
 .walletBox {
   margin: 0 auto;
-  border: 1px solid var(--border-color);
-  border-radius: 0.8rem;
   padding: 1rem;
-  box-shadow: 4px 4px 4px var(--box-shadow);
   min-width: 500px;
   min-height: 100px;
 }

@@ -5,7 +5,7 @@ import { IconCoins, IconWallet } from '@tabler/icons-react';
 import AppContext from '../../contexts/AppContext';
 import Loading from '../../components/Loading';
 
-import generalStyle from '../../styles/general.module.css';
+import generalStyle from '../../styles/App.module.css';
 import style from '../../styles/User.module.css';
 import CopyButton from '../../components/CopyButton';
 
@@ -15,7 +15,7 @@ function User() {
   return (
     <>
       <div className={`${generalStyle.container} ${style.wrapper}`}>
-        <div className={style.walletBox}>
+        <div className={`${generalStyle.box} ${style.walletBox}`}>
           {isLoading ? (
             <Loading />
           ) : (
@@ -58,7 +58,7 @@ function User() {
           )}
         </div>
 
-        <div className={style.box}>
+        <div className={`${generalStyle.box} ${style.box}`}>
           {isLoading ? (
             <Loading />
           ) : (

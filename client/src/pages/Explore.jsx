@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAllBlocks } from '../services/blockchainService';
 import LatestBlocks from '../components/explore/LatestBlocks';
 
-import generalStyle from '../styles/general.module.css';
+import generalStyle from '../styles/App.module.css';
 import style from '../styles/Explore.module.css';
 import BlockOverview from '../components/explore/BlockOverview';
 

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../../contexts/AppContext';
 
-import generalStyle from '../../styles/general.module.css';
+import generalStyle from '../../styles/App.module.css';
 import style from '../../styles/Hero.module.css';
 
 function Hero() {

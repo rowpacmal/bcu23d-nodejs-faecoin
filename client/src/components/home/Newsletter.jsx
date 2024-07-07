@@ -1,4 +1,4 @@
-import generalStyle from '../../styles/general.module.css';
+import generalStyle from '../../styles/App.module.css';
 import style from '../../styles/Newsletter.module.css';
 
 function Newsletter() {

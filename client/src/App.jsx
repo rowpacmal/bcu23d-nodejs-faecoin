@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { getUserAccount } from './services/userService';
 import { getWalletBalance } from './services/walletService';
 
+import './App.css';
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMining, setIsMining] = useState(false);

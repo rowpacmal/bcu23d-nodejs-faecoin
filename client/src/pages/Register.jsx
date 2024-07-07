@@ -6,7 +6,7 @@ import { userSignUp } from '../services/userService';
 import { signFormData, updateFormData } from '../utils/formDataHandler';
 import AppContext from '../contexts/AppContext';
 
-import generalStyle from '../styles/general.module.css';
+import generalStyle from '../styles/App.module.css';
 import style from '../styles/Form.module.css';
 
 function Register() {
