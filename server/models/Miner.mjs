@@ -11,7 +11,6 @@ export default class Miner {
 
   async mineTransaction() {
     const validTransactions = this.transactionPool.validateTransactions();
-    validTransactions.push(Transaction.transactionReward(this.wallet));
 
     this.blockchain.addBlock(validTransactions);
     this.pubnub.broadcastBlockchain();
@@ -23,5 +22,10 @@ export default class Miner {
     }
 
     this.transactionPool.clearAllTransactions();
+
+    const rewardTransaction = Transaction.transactionReward(this.wallet);
+
+    this.transactionPool.addTransaction(rewardTransaction);
+    this.pubnub.broadcastTransaction(rewardTransaction);
   }
 }

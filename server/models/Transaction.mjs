@@ -56,6 +56,10 @@ export default class Transaction {
       outputMap,
     } = transaction;
 
+    if (address === process.env.DEFAULT_REWARD_ADDRESS) {
+      return true;
+    }
+
     const outputTotal = Object.values(outputMap).reduce(
       (total, amount) => total + amount
     );
