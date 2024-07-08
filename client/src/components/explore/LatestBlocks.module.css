@@ -44,13 +44,6 @@
   color: var(--dark-primary-color);
 }
 
-.miner {
-  width: 160px;
-  text-wrap: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .text {
   font-size: 0.8rem;
   color: var(--divider-color);

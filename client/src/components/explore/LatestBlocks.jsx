@@ -1,8 +1,21 @@
 import { IconBox } from '@tabler/icons-react';
 
 import style from './LatestBlocks.module.css';
+import { useEffect, useState } from 'react';
 
 function LatestBlocks({ blockchain, setActiveBlock }) {
+  const [blocks, setBlocks] = useState([]);
+
+  useEffect(() => {
+    const temp = [];
+
+    blockchain.forEach((block) => {
+      temp.push(block);
+    });
+
+    setBlocks(temp);
+  }, [blockchain]);
+
   return (
     <section className={style.section}>
       <h2>Latest Blocks</h2>
@@ -23,24 +36,29 @@ function LatestBlocks({ blockchain, setActiveBlock }) {
 
               <div className={style.info}>
                 <span className={style.label}>{block?.index}</span>
-                <span className={style.text}>
-                  {new Date(block?.timestamp).toLocaleDateString('sv-SE')}
-                </span>
+                <span className={style.text}>Block</span>
               </div>
 
               <div className={style.info}>
-                <span className={style.miner}>
-                  Miner:{' '}
+                <span>
                   {block?.data?.length > 0
-                    ? block?.data?.at(-1)?.inputMap?.address
+                    ? block?.data[0]?.inputMap?.address === 'reward-address'
+                      ? `${Object.keys(block?.data[0]?.outputMap)[0]?.slice(
+                          0,
+                          4
+                        )}-${Object.keys(block?.data[0]?.outputMap)[0]?.slice(
+                          -4
+                        )}`
+                      : '---'
                     : '---'}
                 </span>
-                <span className={style.text}>
-                  {block?.data?.length} txns in this block
-                </span>
+                <span className={style.text}>Miner</span>
               </div>
 
-              <span className={style.reward}>100.00 Fae</span>
+              <div className={style.info}>
+                <span className={style.reward}>100.00 Fae</span>
+                <span className={style.text}>Reward</span>
+              </div>
             </li>
           ))}
       </ul>
