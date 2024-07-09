@@ -1,34 +1,9 @@
 import CopyButton from '../CopyButton';
 import { IconReceipt } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
 
 import style from './BlockOverview.module.css';
 
 function BlockOverview({ activeBlock }) {
-  const [transactionsList, setTransactionList] = useState([]);
-
-  useEffect(() => {
-    if (activeBlock?.data?.length === 0) {
-      setTransactionList([]);
-      return;
-    }
-
-    const temp = [];
-
-    activeBlock?.data?.forEach((transaction) => {
-      const outputMap = Object.entries(transaction?.outputMap);
-      const inputMap = transaction?.inputMap;
-
-      outputMap.forEach((ent) => {
-        if (ent[0] === inputMap.address) return;
-        ent.unshift(inputMap.address);
-        temp.unshift(ent);
-      });
-    });
-
-    setTransactionList(temp);
-  }, [activeBlock]);
-
   return (
     <section className={style.section}>
       <h2>Block Overview</h2>
@@ -53,40 +28,35 @@ function BlockOverview({ activeBlock }) {
             <li>
               <span>Transactions</span>
               <span className={style.divider}></span>
-              <span>{transactionsList.length} transactions in this block</span>
+              <span>
+                {activeBlock?.data?.length} transactions in this block
+              </span>
             </li>
 
             <li>
               <span>Fee Recipient</span>
               <span className={style.divider}></span>
-              <span className={style.nowrap}>
-                {transactionsList.length > 0 ? (
-                  transactionsList.at(-1)[0] === 'reward-address' ? (
-                    <>
-                      {transactionsList.at(-1)[1].slice(0, 4)}-
-                      {transactionsList.at(-1)[1].slice(-4)}
-                      <CopyButton
-                        copyToClipboard={transactionsList.at(-1)[1]}
-                      />
-                    </>
-                  ) : (
-                    '0'
-                  )
-                ) : (
-                  '0'
-                )}
+              <span>
+                {activeBlock?.miner
+                  ? `${activeBlock?.miner?.address?.slice(
+                      0,
+                      4
+                    )}-${activeBlock?.miner?.address?.slice(-4)}`
+                  : '---'}
               </span>
+              {activeBlock?.miner && (
+                <CopyButton copyToClipboard={activeBlock?.miner?.address} />
+              )}
             </li>
 
             <li>
               <span>Block Reward</span>
               <span className={style.divider}></span>
               <span>
-                {transactionsList.length > 0
-                  ? transactionsList.at(-1)[0] === 'reward-address'
-                    ? `${transactionsList.at(-1)[2]} FAE`
-                    : '0 FAE'
-                  : '0 FAE'}
+                {activeBlock?.miner
+                  ? activeBlock?.miner?.reward?.toFixed(2)
+                  : '0.00'}{' '}
+                FAE
               </span>
             </li>
 
@@ -134,8 +104,8 @@ function BlockOverview({ activeBlock }) {
             <h3>Block Transactions</h3>
 
             <ul className={style.ul}>
-              {transactionsList.length > 0 ? (
-                transactionsList.map((transaction, index) => (
+              {activeBlock?.data?.length > 0 ? (
+                activeBlock?.data?.map((transaction, index) => (
                   <li key={index} className={style.li}>
                     <div>
                       <button className={style.button}>
@@ -171,8 +141,6 @@ function BlockOverview({ activeBlock }) {
                       <span className={style.reward}>
                         {transaction[2].toFixed(2)} Fae
                       </span>
-
-                      <span className={style.label}>Amount</span>
                     </div>
                   </li>
                 ))

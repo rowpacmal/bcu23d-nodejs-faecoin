@@ -13,7 +13,32 @@ function Explore() {
 
   useEffect(() => {
     async function getBlockchain() {
-      setBlockchain(await getAllBlocks());
+      const getBlockchain = await getAllBlocks();
+      const temp = [];
+
+      getBlockchain.forEach((block) => {
+        const list = [];
+
+        block?.data?.forEach((transaction) => {
+          const outputMap = Object.entries(transaction?.outputMap);
+          const inputMap = transaction?.inputMap;
+
+          outputMap.forEach((entry) => {
+            if (entry[0] === inputMap.address) {
+              return;
+            }
+
+            entry.unshift(inputMap.address);
+            list.unshift(entry);
+          });
+        });
+
+        block.data = list;
+
+        temp.push(block);
+      });
+
+      setBlockchain(temp.sort((a, b) => b.index - a.index));
     }
 
     getBlockchain();
