@@ -44,8 +44,8 @@ function FormInput({ input, formData, handleChange }) {
             isTypePassword ? (!toggleEye ? 'password' : 'text') : input?.type
           }
           placeholder={input?.placeholder}
-          min={isTypeNumber && '0'}
-          step={isTypeNumber && 'any'}
+          min={isTypeNumber ? '0' : null}
+          step={isTypeNumber ? 'any' : null}
           value={formData?.[input?.name]}
           onChange={handleChange}
           required={input?.required}
