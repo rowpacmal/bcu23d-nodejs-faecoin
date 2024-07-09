@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import Form from '../../components/form/Form';
 
@@ -7,6 +7,7 @@ import { addTransaction } from '../../services/transactionService';
 
 import generalStyle from '../../styles/App.module.css';
 import style from '../../styles/Transaction.module.css';
+import AppContext from '../../contexts/AppContext';
 
 const formLayout = [
   {
@@ -27,6 +28,8 @@ const formLayout = [
 const formButtons = <button type="submit">Send</button>;
 
 function ExchangeSend() {
+  const { getUserInfo } = useContext(AppContext);
+
   const [warning, setWarning] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -50,6 +53,7 @@ function ExchangeSend() {
 
       await addTransaction(token, data);
 
+      getUserInfo();
       setFormData({
         recipient: '',
         amount: '',
