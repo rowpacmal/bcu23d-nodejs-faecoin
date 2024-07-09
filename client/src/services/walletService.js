@@ -9,3 +9,13 @@ export const getWalletBalance = async (token) => {
 
   return response?.data;
 };
+
+export const getPendingWalletBalance = async (token) => {
+  const response = await httpClient({
+    method: 'get',
+    endpoint: '/wallet/pending',
+    token,
+  });
+
+  return response?.data;
+};
