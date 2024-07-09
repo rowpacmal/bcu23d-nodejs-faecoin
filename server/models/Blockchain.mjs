@@ -7,8 +7,8 @@ export default class Blockchain {
     this.chain = [Block.genesis];
   }
 
-  addBlock(data) {
-    const block = Block.mine({ prevBlock: this.chain.at(-1), data });
+  addBlock({ data, miner }) {
+    const block = Block.mine({ prevBlock: this.chain.at(-1), data, miner });
 
     this.chain.push(block);
 

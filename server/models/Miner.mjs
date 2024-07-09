@@ -12,7 +12,13 @@ export default class Miner {
   async mineTransaction() {
     const validTransactions = this.transactionPool.validateTransactions();
 
-    this.blockchain.addBlock(validTransactions);
+    this.blockchain.addBlock({
+      data: validTransactions,
+      miner: {
+        address: this.wallet.publicKey,
+        reward: +process.env.DEFAULT_MINING_REWARD,
+      },
+    });
     this.pubnub.broadcastBlockchain();
 
     if (!(await Chain.findOne())) {

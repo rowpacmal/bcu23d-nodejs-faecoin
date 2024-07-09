@@ -2,7 +2,16 @@ import hexToBinary from 'hex-to-binary';
 import { createHash } from '../utils/cryptoLib.mjs';
 
 export default class Block {
-  constructor({ index, timestamp, prevHash, hash, data, nonce, difficulty }) {
+  constructor({
+    index,
+    timestamp,
+    prevHash,
+    hash,
+    data,
+    nonce,
+    difficulty,
+    miner,
+  }) {
     this.index = index;
     this.timestamp = timestamp;
     this.prevHash = prevHash;
@@ -10,6 +19,7 @@ export default class Block {
     this.data = data;
     this.nonce = nonce;
     this.difficulty = difficulty;
+    this.miner = miner;
   }
 
   static get genesis() {
@@ -21,10 +31,11 @@ export default class Block {
       data: [],
       nonce: 0,
       difficulty: +process.env.DEFAULT_DIFFICULTY || 3,
+      miner: null,
     });
   }
 
-  static mine({ prevBlock, data }) {
+  static mine({ prevBlock, data, miner }) {
     const index = prevBlock.index + 1;
     const prevHash = prevBlock.hash;
 
@@ -36,7 +47,15 @@ export default class Block {
       nonce++;
       timestamp = Date.now();
       difficulty = this.adjustDifficultyLevel(prevBlock, timestamp);
-      hash = createHash(index, timestamp, prevHash, data, nonce, difficulty);
+      hash = createHash(
+        index,
+        timestamp,
+        prevHash,
+        data,
+        nonce,
+        difficulty,
+        miner
+      );
     } while (!hexToBinary(hash).startsWith('0'.repeat(difficulty)));
 
     return new this({
@@ -47,6 +66,7 @@ export default class Block {
       data,
       nonce,
       difficulty,
+      miner,
     });
   }
 
