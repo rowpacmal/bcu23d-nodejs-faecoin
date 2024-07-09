@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getAllBlocks } from '../services/blockchainService';
+
+import BlockOverview from '../components/explore/BlockOverview';
 import LatestBlocks from '../components/explore/LatestBlocks';
+import Demo from '../components/Demo';
 
 import generalStyle from '../styles/App.module.css';
 import style from './Explore.module.css';
-import BlockOverview from '../components/explore/BlockOverview';
 
 function Explore() {
   const [blockchain, setBlockchain] = useState([]);
@@ -60,7 +62,7 @@ function Explore() {
   }
 
   return (
-    <div className={`${generalStyle.container} ${style.wrapper}`}>
+    <div className={`${generalStyle.container} ${style.container}`}>
       <div>
         <button
           className={`${style.button}${!toggle ? ` ${style.active}` : ''}`}
@@ -93,6 +95,8 @@ function Explore() {
       ) : (
         <div className={style.transactions}>
           <h2>Latest Transactions</h2>
+
+          <Demo />
         </div>
       )}
     </div>
