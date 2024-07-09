@@ -45,6 +45,22 @@ export const getTransactionPool = (req, res, next) => {
 };
 
 export const mineTransactions = async (req, res, next) => {
+  const transactionMap = Object.values(transactionPool.transactionMap);
+  let rewardExist = false;
+
+  transactionMap.forEach((transaction) => {
+    if (transaction.inputMap.address === process.env.DEFAULT_REWARD_ADDRESS) {
+      rewardExist = true;
+    }
+  });
+
+  if (
+    !(transactionMap.length > 0) ||
+    (!(transactionMap.length > 1) && rewardExist)
+  ) {
+    return next(new ErrorResponse('Transaction pool is empty', 400));
+  }
+
   const miner = new Miner({
     blockchain,
     transactionPool,
