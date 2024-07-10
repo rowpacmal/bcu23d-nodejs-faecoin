@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { verifySignature } from '../utils/cryptoLib.mjs';
 import ErrorResponse from './ErrorResponse.mjs';
+import {
+  testDefaultMiningReward,
+  testDefaultRewardAddress,
+} from '../config/testConfig.mjs';
 
 export default class Transaction {
   constructor({ id, sender, recipient, amount, inputMap, outputMap }) {
@@ -29,8 +33,13 @@ export default class Transaction {
 
   static transactionReward(miner) {
     return new this({
-      inputMap: { address: process.env.DEFAULT_REWARD_ADDRESS },
-      outputMap: { [miner.publicKey]: +process.env.DEFAULT_MINING_REWARD },
+      inputMap: {
+        address: process.env.DEFAULT_REWARD_ADDRESS || testDefaultRewardAddress,
+      },
+      outputMap: {
+        [miner.publicKey]:
+          +process.env.DEFAULT_MINING_REWARD || testDefaultMiningReward,
+      },
     });
   }
 

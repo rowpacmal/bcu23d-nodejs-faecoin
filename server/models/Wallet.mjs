@@ -1,10 +1,11 @@
+import { testDefaultBalance } from '../config/testConfig.mjs';
 import { createHash, ellipticHash } from '../utils/cryptoLib.mjs';
 import Transaction from './Transaction.mjs';
 import ErrorResponse from './ErrorResponse.mjs';
 
 export default class Wallet {
   constructor() {
-    this.balance = +process.env.DEFAULT_BALANCE;
+    this.balance = +process.env.DEFAULT_BALANCE || testDefaultBalance || 0;
     this.keyPair = ellipticHash.genKeyPair();
     this.publicKey = this.keyPair.getPublic().encode('hex');
   }
