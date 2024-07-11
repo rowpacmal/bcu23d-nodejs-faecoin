@@ -53,7 +53,7 @@ describe('Transaction()', () => {
       expect(transaction.inputMap.amount).toEqual(sender.balance);
     });
 
-    it('- should contain senders public key)', () => {
+    it('- should contain senders public key', () => {
       expect(transaction.inputMap.address).toEqual(sender.publicKey);
     });
 
@@ -153,7 +153,7 @@ describe('Transaction()', () => {
       rewardTransaction = Transaction.transactionReward(miner);
     });
 
-    it('- should create a new txn, containing the default reward address ', () => {
+    it('- should create a new transaction, containing the default reward address ', () => {
       expect(rewardTransaction.inputMap.address).toEqual(
         testDefaultRewardAddress
       );
