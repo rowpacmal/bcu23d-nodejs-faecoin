@@ -81,7 +81,7 @@ export const validAccountToken = asyncHandler(async (req, res, next) => {
   const user = await User.findById(decodedToken.id);
 
   if (!user) {
-    return next(new ErrorResponse('User not found', 404));
+    return next(new ErrorResponse('Invalid token, access denied', 401));
   }
 
   res.status(200).json(

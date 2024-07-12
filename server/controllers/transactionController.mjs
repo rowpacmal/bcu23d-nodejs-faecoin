@@ -10,6 +10,10 @@ export const addTransaction = (req, res, next) => {
     return next(new ErrorResponse('Recipient and/or amount is missing', 400));
   }
 
+  if (typeof amount !== 'number') {
+    return next(new ErrorResponse('Amount is not a valid number', 400));
+  }
+
   let transaction = transactionPool.transactionExist(wallet.publicKey);
 
   if (transaction) {
