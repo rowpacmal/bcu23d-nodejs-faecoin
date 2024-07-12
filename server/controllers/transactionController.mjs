@@ -56,7 +56,7 @@ export const mineTransactions = async (req, res, next) => {
     !(transactionMap.length > 1) &&
     transactionMap[0].inputMap.address === process.env.DEFAULT_REWARD_ADDRESS
   ) {
-    return next(new ErrorResponse(errorRes));
+    return next(errorRes);
   }
 
   const miner = new Miner({

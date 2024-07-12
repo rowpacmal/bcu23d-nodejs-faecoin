@@ -11,9 +11,10 @@ import {
 
 const transactionRouter = express.Router();
 
+transactionRouter.route('/').get(getTransactionPool);
+
 transactionRouter.use(protectedAccess);
 
-transactionRouter.route('/').get(getTransactionPool);
 transactionRouter.route('/add').post(addTransaction);
 
 transactionRouter.use(authorizedAccess('manager', 'admin'));

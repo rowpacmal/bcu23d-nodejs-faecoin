@@ -80,8 +80,16 @@ export default class Blockchain {
     }
 
     for (let i = 1; i < chain.length; i++) {
-      const { index, timestamp, prevHash, hash, data, nonce, difficulty } =
-        chain.at(i);
+      const {
+        index,
+        timestamp,
+        prevHash,
+        hash,
+        data,
+        nonce,
+        difficulty,
+        miner,
+      } = chain.at(i);
       const { hash: lastHash, difficulty: lastDifficulty } = chain.at(i - 1);
       const validHash = createHash(
         index,
@@ -89,7 +97,8 @@ export default class Blockchain {
         prevHash,
         data,
         nonce,
-        difficulty
+        difficulty,
+        miner
       );
 
       if (hash !== validHash) {
