@@ -107,7 +107,7 @@ describe('TransactionPool()', () => {
   });
 
   describe('Clear Block Transactions:', () => {
-    it('should clear existing transactions on the blockchain from the transaction pool', () => {
+    it('- should clear existing transactions on the blockchain from the transaction pool', () => {
       const blockchain = new Blockchain();
       const expectedTransactionMap = {};
 
