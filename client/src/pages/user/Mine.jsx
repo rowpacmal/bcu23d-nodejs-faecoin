@@ -1,13 +1,16 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { IconTimelineEventPlus } from '@tabler/icons-react';
-import AppContext from '../../contexts/AppContext';
 import { mineTransactions } from '../../services/transactionService';
-
-import style from './Mine.module.css';
+import AppContext from '../../contexts/AppContext';
 import Loading from '../../components/Loading';
 
+import style from './Mine.module.css';
+
 function Mine() {
-  const { getUserInfo, isMining, setIsMining } = useContext(AppContext);
+  const { getUserInfo, isMining, setIsMining, user } = useContext(AppContext);
+
+  const [warning, setWarning] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   async function handleMineBlock() {
     setIsMining(true);
@@ -16,13 +19,22 @@ function Mine() {
       const token = localStorage.getItem('TOKEN');
 
       await mineTransactions(token);
+
+      getUserInfo();
     } catch (error) {
-      console.log(error.message);
+      if (warning) return;
+
+      setWarning(error.message);
+      setIsVisible(true);
+
+      setTimeout(() => {
+        setIsVisible(false);
+
+        setTimeout(() => setWarning(null), 1000);
+      }, 3000);
     } finally {
       setIsMining(false);
     }
-
-    getUserInfo();
   }
 
   return (
@@ -56,11 +68,31 @@ function Mine() {
         </div>
       </section>
 
+      {user.role === 'user' && (
+        <p className={`${style.warning} ${style.show}`}>
+          To access this service, please upgrade your account to
+          &quot;Manager&quot; status
+        </p>
+      )}
+
       <div className={style.buttons}>
         {isMining ? (
           <Loading setSpinner={true} />
         ) : (
-          <button onClick={handleMineBlock}>Mine block</button>
+          <>
+            <button
+              onClick={handleMineBlock}
+              disabled={user.role === 'user' ? true : false}
+            >
+              Mine block
+            </button>
+
+            <p
+              className={`${style.warning}${isVisible ? ` ${style.show}` : ''}`}
+            >
+              {warning}
+            </p>
+          </>
         )}
       </div>
     </>

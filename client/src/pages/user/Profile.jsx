@@ -3,6 +3,7 @@ import { IconUserCircle } from '@tabler/icons-react';
 import AppContext from '../../contexts/AppContext';
 import { updateFormData } from '../../utils/formDataHandler';
 import Form from '../../components/form/Form';
+import { editUserDetails } from '../../services/userService';
 
 const formLayout = [
   {
@@ -39,7 +40,7 @@ const formLayout = [
 const formButtons = <button type="submit">Update profile</button>;
 
 function Profile() {
-  const { user } = useContext(AppContext);
+  const { user, getUserInfo } = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: user?.name,
     email: user?.email,
@@ -53,7 +54,15 @@ function Profile() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    alert('OK');
+    try {
+      const token = localStorage.getItem('TOKEN');
+
+      await editUserDetails(token, formData);
+
+      getUserInfo();
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   return (

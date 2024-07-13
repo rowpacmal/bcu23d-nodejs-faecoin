@@ -11,6 +11,21 @@
 }
 
 .buttons {
-  margin-right: auto;
-  min-width: 123px;
+  display: flex;
+  place-items: center;
+  gap: 1rem;
+}
+
+.warning {
+  width: max-content;
+  color: #ff0000;
+  padding: 0.3rem 1.2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.3rem;
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+}
+
+.show {
+  opacity: 1;
 }
