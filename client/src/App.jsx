@@ -4,10 +4,7 @@ import AppContext from './contexts/AppContext';
 import { useEffect, useState } from 'react';
 
 import { getUserAccount } from './services/userService';
-import {
-  getPendingWalletBalance,
-  getWalletBalance,
-} from './services/walletService';
+import { getWalletBalance } from './services/walletService';
 
 import './App.css';
 
@@ -17,7 +14,6 @@ function App() {
   const [isValid, setIsValid] = useState(false);
   const [user, setUser] = useState({});
   const [wallet, setWallet] = useState({});
-  const [pendingBalance, setPendingBalance] = useState();
 
   async function getUserInfo() {
     setIsLoading(true);
@@ -31,7 +27,6 @@ function App() {
     try {
       setUser(await getUserAccount(token));
       setWallet(await getWalletBalance(token));
-      setPendingBalance(await getPendingWalletBalance(token));
       setIsValid(true);
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -59,8 +54,6 @@ function App() {
           setUser,
           wallet,
           setWallet,
-          pendingBalance,
-          setPendingBalance,
           getUserInfo,
         }}
       >

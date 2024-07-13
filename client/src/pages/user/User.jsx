@@ -10,7 +10,7 @@ import style from './User.module.css';
 import CopyButton from '../../components/CopyButton';
 
 function User() {
-  const { isLoading, wallet, pendingBalance } = useContext(AppContext);
+  const { isLoading, wallet } = useContext(AppContext);
 
   return (
     <>
@@ -47,9 +47,7 @@ function User() {
                 <span className={style.label}>Balance</span>
 
                 <span className={`${style.span} ${style.big}`}>
-                  <div>
-                    {pendingBalance?.toFixed(2) || wallet?.balance?.toFixed(2)}
-                  </div>
+                  <div>{wallet?.balance?.toFixed(2)}</div>
                 </span>
               </div>
 
