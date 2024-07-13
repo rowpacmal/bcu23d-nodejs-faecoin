@@ -17,9 +17,15 @@ export const httpClient = async ({ method, endpoint, data, token }) => {
 
   try {
     const response = await fetch(`${settings.baseUrl}${endpoint}`, options);
-    const result = await response.json();
+    let result;
 
-    if (!response.ok) throw new Error(result.error);
+    if (response.status !== 204) {
+      result = await response.json();
+    }
+
+    if (!response.ok) {
+      throw new Error(result.error);
+    }
 
     return result;
   } catch (error) {
