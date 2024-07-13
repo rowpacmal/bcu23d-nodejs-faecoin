@@ -1,0 +1,59 @@
+.container {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.box {
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  box-shadow: 4px 4px 4px var(--box-shadow);
+  padding: 2rem;
+}
+
+.section {
+  max-width: 512px;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 1rem;
+  padding: 2rem 4rem;
+
+  h2 {
+    line-height: normal;
+  }
+}
+
+.alert {
+  height: min-content;
+  background-color: var(--light-primary-color);
+  font-size: 0.8rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.embolden {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.altButton {
+  background-color: var(--accent-color);
+}
+
+.copyButton {
+  background-color: var(--secondary-text-color);
+  border-radius: 0.3rem;
+  display: flex;
+  place-items: center;
+  padding: 0.2rem;
+  margin-left: 0.3rem;
+}
+
+.text {
+  color: var(--secondary-text-color);
+  font-size: 0.8rem;
+  text-align: center;
+}

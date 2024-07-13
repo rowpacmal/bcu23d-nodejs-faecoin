@@ -1,7 +1,8 @@
 {
-  "name": "client",
+  "name": "faecoin-client",
   "private": true,
   "version": "0.0.0",
+  "description": "Frontend for FaeCoin Blockchain Application",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,8 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.7.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

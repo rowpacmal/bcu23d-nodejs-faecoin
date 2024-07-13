@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { RouterProvider } from 'react-router-dom';
+import { router } from './Router';
+import AppContext from './contexts/AppContext';
+import { useEffect, useState } from 'react';
+
+import { getUserAccount } from './services/userService';
+import { getWalletBalance } from './services/walletService';
+
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(true);
+  const [isMining, setIsMining] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [user, setUser] = useState({});
+  const [wallet, setWallet] = useState({});
+
+  async function getUserInfo() {
+    setIsLoading(true);
+
+    const token = localStorage.getItem('TOKEN');
+
+    if (!token) {
+      return setIsLoading(false);
+    }
+
+    try {
+      setUser(await getUserAccount(token));
+      setWallet(await getWalletBalance(token));
+      setIsValid(true);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setIsValid(false);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <AppContext.Provider
+        value={{
+          isLoading,
+          setIsLoading,
+          isMining,
+          setIsMining,
+          isValid,
+          setIsValid,
+          user,
+          setUser,
+          wallet,
+          setWallet,
+          getUserInfo,
+        }}
+      >
+        <RouterProvider router={router} />
+      </AppContext.Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
