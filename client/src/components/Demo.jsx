@@ -1,4 +1,4 @@
-import generalStyle from '../styles/App.module.css';
+import generalStyle from '../App.module.css';
 
 function Demo() {
   return (

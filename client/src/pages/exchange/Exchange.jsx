@@ -8,7 +8,7 @@ import {
   IconReplace,
 } from '@tabler/icons-react';
 
-import style from '../../styles/Transaction.module.css';
+import style from './Exchange.module.css';
 
 function Exchange() {
   return (

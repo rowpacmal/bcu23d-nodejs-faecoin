@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import generalStyle from '../../styles/App.module.css';
+import generalStyle from '../../App.module.css';
 import style from './Footer.module.css';
 
 function Footer() {

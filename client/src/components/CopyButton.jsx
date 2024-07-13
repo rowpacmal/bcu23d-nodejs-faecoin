@@ -1,6 +1,6 @@
 import { IconCopy } from '@tabler/icons-react';
 
-import style from '../styles/App.module.css';
+import style from '../App.module.css';
 
 function CopyButton({ copyToClipboard }) {
   function handleCopyToClipboard() {

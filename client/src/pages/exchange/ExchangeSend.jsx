@@ -5,8 +5,8 @@ import Form from '../../components/form/Form';
 import { updateFormData } from '../../utils/formDataHandler';
 import { addTransaction } from '../../services/transactionService';
 
-import generalStyle from '../../styles/App.module.css';
-import style from '../../styles/Transaction.module.css';
+import generalStyle from '../../App.module.css';
+import style from './Exchange.module.css';
 import AppContext from '../../contexts/AppContext';
 
 const formLayout = [

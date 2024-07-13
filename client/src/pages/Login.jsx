@@ -6,7 +6,7 @@ import Form from '../components/form/Form';
 import { userSignIn } from '../services/userService';
 import { signFormData, updateFormData } from '../utils/formDataHandler';
 
-import generalStyle from '../styles/App.module.css';
+import generalStyle from '../App.module.css';
 
 const formLayout = [
   {

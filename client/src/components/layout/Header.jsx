@@ -4,7 +4,7 @@ import { IconLogout, IconUserCircle } from '@tabler/icons-react';
 import AppContext from '../../contexts/AppContext';
 import Loading from '../Loading';
 
-import generalStyle from '../../styles/App.module.css';
+import generalStyle from '../../App.module.css';
 import style from './Header.module.css';
 
 function Header() {

@@ -5,7 +5,7 @@ import BlockOverview from '../components/explore/BlockOverview';
 import LatestBlocks from '../components/explore/LatestBlocks';
 import Demo from '../components/Demo';
 
-import generalStyle from '../styles/App.module.css';
+import generalStyle from '../App.module.css';
 import style from './Explore.module.css';
 
 function Explore() {
