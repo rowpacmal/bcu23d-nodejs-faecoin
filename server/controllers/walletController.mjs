@@ -1,4 +1,5 @@
 import { blockchain, transactionPool, wallet } from '../startup.mjs';
+
 import Wallet from '../models/Wallet.mjs';
 import DataResponse from '../models/DataResponse.mjs';
 

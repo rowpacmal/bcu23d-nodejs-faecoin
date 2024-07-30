@@ -1,4 +1,6 @@
 import { blockchain, pubnub, transactionPool, wallet } from '../startup.mjs';
+
+import asyncHandler from '../middlewares/asyncHandler.mjs';
 import Miner from '../models/Miner.mjs';
 import DataResponse from '../models/DataResponse.mjs';
 import ErrorResponse from '../models/ErrorResponse.mjs';
@@ -48,7 +50,7 @@ export const getTransactionPool = (req, res, next) => {
   );
 };
 
-export const mineTransactions = async (req, res, next) => {
+export const mineTransactions = asyncHandler(async (req, res, next) => {
   const errorRes = new ErrorResponse('Transaction pool is empty', 400);
   const transactionMap = Object.values(transactionPool.transactionMap);
 
@@ -78,4 +80,4 @@ export const mineTransactions = async (req, res, next) => {
       statusCode: 200,
     })
   );
-};
+});
